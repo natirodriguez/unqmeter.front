@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseService } from './services/base.service';
 import { ConfigService } from './services/config.service';
+import { HomePageComponent } from './home.page/home.page.component';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -13,7 +14,8 @@ export const configFactory = (configService: ConfigService) => {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

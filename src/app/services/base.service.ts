@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from "./config.service";
 import { Observable } from "rxjs";
 import { Message } from "../entities/Message";
+import { Presentacion } from "../entities/Presentacion";
 
 @Injectable({
     providedIn: 'root'
@@ -37,5 +38,23 @@ import { Message } from "../entities/Message";
         return this.http.get<Message>(this.unqMeterUrl
             .concat(this.Controller)
             .concat(subPath));
+    }
+
+    getMisPresentaciones() : Observable<Presentacion[]> {
+      var subPath = 'GetMisPresentaciones';
+
+      return this.http.get<Presentacion[]>(this.unqMeterUrl
+          .concat(this.Controller)
+          .concat(subPath));
+    }
+
+    savePresentacion(presentacion: Presentacion){
+      const headers = { 'content-type': 'application/json'}; 
+      var subPath = 'PostPresentacion';
+      const body=JSON.stringify(presentacion);
+
+      this.http.put<Presentacion>(this.unqMeterUrl
+        .concat(this.Controller)
+        .concat(subPath), body,{'headers':headers});
     }
 }
