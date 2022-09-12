@@ -7,6 +7,7 @@ import { BaseService } from './services/base.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit{
 
   constructor(private baseService: BaseService) {

@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseService } from './services/base.service';
 import { ConfigService } from './services/config.service';
+import { HomePageComponent } from './home.page/home.page.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { LoginComponent } from './components/login/login.component';
@@ -23,6 +24,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
+    HomePageComponent,
     LoginComponent
   ],
   imports: [
