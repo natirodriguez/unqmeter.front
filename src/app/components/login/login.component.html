@@ -1,9 +1,17 @@
-<asl-google-signin-button type='icon' size='medium'></asl-google-signin-button>
-<img *ngIf="user != null" src="{{ user.photoUrl }}" referrerpolicy="no-referrer">
-<div *ngIf="user != null">
-  <h4>{{ user.name }}</h4>
-  <p>{{ user.email }}</p>
+<div class="container">
+  <div class="row mb-3 text-center">
+      <div class="col-md-12">
+        <h3>Bienvenido !</h3>
+        <br />
+        <h5>Inicie sesión en su cuenta UNQMeter</h5>
+      </div>
+  </div>
+<div class="row text-center">
+  <div class="col-md-12">
+    <button class="border-none" *ngIf="user == null">
+      <asl-google-signin-button type='standard' size='medium'></asl-google-signin-button>
+    </button>
+  </div>
 </div>
-<div class="card-block">
-  <button class="btn btn-danger" (click)="signOut()">Sign out</button>
 </div>
+

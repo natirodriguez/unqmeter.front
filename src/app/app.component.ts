@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 import { Message } from './entities/Message';
 import { BaseService } from './services/base.service';
 
@@ -9,15 +12,18 @@ import { BaseService } from './services/base.service';
 })
 
 export class AppComponent implements OnInit{
-
-  constructor(private baseService: BaseService) {
+  user!: SocialUser;
+  constructor(private baseService: BaseService,private socialAuthService: SocialAuthService,private router: Router) {
   }
 
   title = '';
 
   ngOnInit(): void {
     this.getTitle();
-  }
+    this.socialAuthService.authState
+    .subscribe(res => {
+      this.user = res;
+    })  }
 
   getTitle() {
     this.baseService.getHelloWorld()
@@ -27,4 +33,10 @@ export class AppComponent implements OnInit{
         }
       );
   }
+
+  signOut(): void {
+    this.socialAuthService.signOut();
+    this.router.navigate(['/']);
+  }
 }
+

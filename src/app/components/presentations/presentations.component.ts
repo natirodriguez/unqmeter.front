@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Presentacion } from '../entities/Presentacion';
-import { BaseService } from '../services/base.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Presentacion } from 'src/app/entities/Presentacion';
+import { BaseService } from 'src/app/services/base.service';
 
 @Component({
-  selector: 'app-home.page',
-  templateUrl: './home.page.component.html',
-  styleUrls: ['./home.page.component.scss']
+  selector: 'app-presentations',
+  templateUrl: './presentations.component.html',
+  styleUrls: ['./presentations.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class PresentationsComponent implements OnInit {
+
   presentaciones: Presentacion[] = [];
   closeResult: string = '';
 
@@ -37,5 +38,5 @@ export class HomePageComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-     
+
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from './../../services/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ExternalAuthDto } from 'src/app/interfaces/ExternalAuthDto.model';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   errorMessage: string = '';
   showError!: boolean;
-  user: SocialUser | null = new SocialUser; 
+  user!: SocialUser;
+  @Output() newItemEvent = new EventEmitter<SocialUser>();
 
   constructor(private socialAuthService: SocialAuthService, private router: Router, private route: ActivatedRoute,private authService: AuthenticationService,private http: HttpClient) { 
     
@@ -38,8 +39,9 @@ export class LoginComponent implements OnInit {
             this.validateExternalAuth(externalAuth);
       }
       this.user = user;
+      this.newItemEvent.emit(user);
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = '/presentations';
   }
 
   validateControl = (controlName: string) => {
