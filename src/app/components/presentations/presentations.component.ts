@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Presentacion } from 'src/app/entities/Presentacion';
 import { BaseService } from 'src/app/services/base.service';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-presentations',
@@ -9,16 +10,25 @@ import { BaseService } from 'src/app/services/base.service';
   styleUrls: ['./presentations.component.scss']
 })
 export class PresentationsComponent implements OnInit {
-
   presentaciones: Presentacion[] = [];
   closeResult: string = '';
+  user!: SocialUser;
+  presentacionNueva: Presentacion = {
+    nombre: '', 
+    usuario: this.user
+  }
 
-  constructor(private baseService: BaseService, private modalService: NgbModal) {
+  constructor(private baseService: BaseService, private modalService: NgbModal, private socialAuthService: SocialAuthService) {
     
   }
   ngOnInit(): void {
-    this.baseService.getMisPresentaciones().subscribe(
-      (res:Presentacion[])=> this.presentaciones = res);
+    this.socialAuthService.authState
+      .subscribe(res => {
+        this.user = res;
+      })
+
+      this.baseService.getMisPresentaciones(this.user).subscribe(
+        (res: Presentacion[]) => this.presentaciones = res);  
   }
 
   open(content:any) {
@@ -27,6 +37,10 @@ export class PresentationsComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  savePresentacion() {
+    this.baseService.savePresentacion(this.presentacionNueva);
   }
 
   private getDismissReason(reason: any): string {

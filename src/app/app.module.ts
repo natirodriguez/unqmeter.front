@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { PresentationsComponent } from './components/presentations/presentations.component';
+import { FormsModule } from '@angular/forms';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -35,6 +36,7 @@ export function tokenGetter() {
     HttpClientModule,
     SocialLoginModule,
     ReactiveFormsModule,
+    FormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -4,6 +4,7 @@ import { ConfigService } from "./config.service";
 import { Observable } from "rxjs";
 import { Message } from "../entities/Message";
 import { Presentacion } from "../entities/Presentacion";
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
     providedIn: 'root'
@@ -32,25 +33,19 @@ import { Presentacion } from "../entities/Presentacion";
 
     Controller = 'Presentation/';
 
-    getHelloWorld(){
-        var subPath = 'GetHelloWorld';
-
-        return this.http.get<Message>(this.unqMeterUrl
-            .concat(this.Controller)
-            .concat(subPath));
-    }
-
-    getMisPresentaciones() : Observable<Presentacion[]> {
+    getMisPresentaciones(user: SocialUser) : Observable<Presentacion[]> {
       var subPath = 'GetMisPresentaciones';
+      const body=JSON.stringify(user);
 
       return this.http.get<Presentacion[]>(this.unqMeterUrl
           .concat(this.Controller)
-          .concat(subPath));
+          .concat(subPath)
+          .concat("/"+ user.id));
     }
 
     savePresentacion(presentacion: Presentacion){
       const headers = { 'content-type': 'application/json'}; 
-      var subPath = 'PostPresentacion';
+      var subPath = 'PostNuevaPresentacion';
       const body=JSON.stringify(presentacion);
 
       this.http.put<Presentacion>(this.unqMeterUrl

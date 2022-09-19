@@ -19,20 +19,10 @@ export class AppComponent implements OnInit{
   title = '';
 
   ngOnInit(): void {
-    this.getTitle();
     this.socialAuthService.authState
     .subscribe(res => {
       this.user = res;
     })  }
-
-  getTitle() {
-    this.baseService.getHelloWorld()
-      .subscribe(
-        (res: Message) => {
-          this.title = res.content;
-        }
-      );
-  }
 
   signOut(): void {
     this.socialAuthService.signOut();

@@ -46,13 +46,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <label for="firstName">Título</label>
-                    <input type="text" class="form-control" id="titulo" required>
+                    <input type="text" class="form-control"  [(ngModel)]="presentacionNueva.nombre" name="nombre" id="titulo" required>
                     <div class="invalid-feedback">El título es requerido</div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Guardar</button>
+          <button type="button" class="btn btn-primary" (click)="savePresentacion(); modal.close('Save click')">Guardar</button>
         </div>
       </ng-template>
 </div>
