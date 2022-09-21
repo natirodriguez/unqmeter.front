@@ -40,7 +40,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
       return this.http.get<Presentacion[]>(this.unqMeterUrl
           .concat(this.Controller)
           .concat(subPath)
-          .concat("/"+ user.id));
+          .concat("/"+ user.email));
     }
 
     savePresentacion(presentacion: Presentacion){
