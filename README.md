@@ -15,12 +15,12 @@ Hemos decidido trabajar con lo mencionado anteriormente, ya que ambos trabajamos
 
 Métodos HTTP: 
 
-* POST: /api/Login/ExternalLogin
+* <b>POST:</b> /api/Login/ExternalLogin <br>
 Método utilizado para el login con google
 
-* GET: /api/Presentation/GetMisPresentaciones/{email}
+* <b>GET:</b> /api/Presentation/GetMisPresentaciones/{email} <br>
 Método utilizado para obtener todas las presentaciones realizadas por la persona con el email pasado por parametro.
 
-* POST: /api/Presentation/PostNuevaPresentacion
+* <b>POST:</b> /api/Presentation/PostNuevaPresentacion <br>
 Método utilizado para generar una nueva presentación
 
