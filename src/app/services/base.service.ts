@@ -1,10 +1,11 @@
-import { Injectable } from "@angular/core";
+import { ComponentFactoryResolver, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from "./config.service";
 import { Observable } from "rxjs";
 import { Message } from "../entities/Message";
 import { Presentacion } from "../entities/Presentacion";
 import { SocialUser } from '@abacritt/angularx-social-login';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +27,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
       headers.append('Accept', 'application/pdf');
     }
     
-    constructor(public http: HttpClient,private configService : ConfigService) {
+    constructor(public http: HttpClient,private configService : ConfigService,private router: Router) {
     }
     
     unqMeterUrl = this.configService.config.unqMeterApiUrl;
@@ -47,8 +48,11 @@ import { SocialUser } from '@abacritt/angularx-social-login';
       var subPath = 'PostNuevaPresentacion';
       const body= JSON.stringify(presentacion);
 
-      return this.http.post<any>(this.unqMeterUrl
+      return this.http.post<Presentacion>(this.unqMeterUrl
         .concat(this.Controller)
-        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'});
+        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
+        .subscribe((data) => {
+          //this.router.navigate([this.returnUrl]);
+        });;
     }
 }
