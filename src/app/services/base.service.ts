@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from "./config.service";
-import { Observable } from "rxjs";
+import { catchError, Observable, of } from "rxjs";
 import { Message } from "../entities/Message";
 import { Presentacion } from "../entities/Presentacion";
 import { SocialUser } from '@abacritt/angularx-social-login';
@@ -49,6 +49,9 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 
       return this.http.post<any>(this.unqMeterUrl
         .concat(this.Controller)
-        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'});
+        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
+        .pipe(
+          catchError(err => of([]))
+      );
     }
 }

@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { PresentationsComponent } from './components/presentations/presentations.component';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -36,6 +38,8 @@ export function tokenGetter() {
     HttpClientModule,
     SocialLoginModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule,
     JwtModule.forRoot({
       config: {

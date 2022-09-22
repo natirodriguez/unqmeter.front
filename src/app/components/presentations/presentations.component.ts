@@ -3,6 +3,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Presentacion } from 'src/app/entities/Presentacion';
 import { BaseService } from 'src/app/services/base.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-presentations',
@@ -18,7 +19,7 @@ export class PresentationsComponent implements OnInit {
     usuarioCreador: ''
   }
 
-  constructor(private baseService: BaseService, private modalService: NgbModal, private socialAuthService: SocialAuthService) {
+  constructor(private baseService: BaseService, private modalService: NgbModal, private socialAuthService: SocialAuthService,private toastr: ToastrService) {
     
   }
   ngOnInit(): void {
@@ -41,7 +42,15 @@ export class PresentationsComponent implements OnInit {
 
   savePresentacion() {
     this.presentacionNueva.usuarioCreador = this.user.email;
-    this.baseService.savePresentacion(this.presentacionNueva);
+    this.baseService.savePresentacion(this.presentacionNueva).subscribe((res : any) =>{
+      if (res.status == 200) {
+        this.toastr.success('Se realizo la operación con exito');
+      }
+      else {
+        this.toastr.error('Error al realizar la operación');
+      }
+    },
+    );
   }
 
   private getDismissReason(reason: any): string {
