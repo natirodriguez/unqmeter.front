@@ -3,5 +3,5 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 export class Presentacion{
     public nombre!: string;
-    public usuario!: SocialUser;
+    public usuarioCreador!: string;
 }

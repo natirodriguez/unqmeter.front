@@ -15,7 +15,7 @@ export class PresentationsComponent implements OnInit {
   user!: SocialUser;
   presentacionNueva: Presentacion = {
     nombre: '', 
-    usuario: this.user
+    usuarioCreador: ''
   }
 
   constructor(private baseService: BaseService, private modalService: NgbModal, private socialAuthService: SocialAuthService) {
@@ -40,6 +40,7 @@ export class PresentationsComponent implements OnInit {
   }
 
   savePresentacion() {
+    this.presentacionNueva.usuarioCreador = this.user.email;
     this.baseService.savePresentacion(this.presentacionNueva);
   }
 

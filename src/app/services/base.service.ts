@@ -44,12 +44,11 @@ import { SocialUser } from '@abacritt/angularx-social-login';
     }
 
     savePresentacion(presentacion: Presentacion){
-      const headers = { 'content-type': 'application/json'}; 
       var subPath = 'PostNuevaPresentacion';
-      const body=JSON.stringify(presentacion);
+      const body= JSON.stringify(presentacion);
 
-      this.http.put<Presentacion>(this.unqMeterUrl
+      return this.http.post<any>(this.unqMeterUrl
         .concat(this.Controller)
-        .concat(subPath), body,{'headers':headers});
+        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'});
     }
 }
