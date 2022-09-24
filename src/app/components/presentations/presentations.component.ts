@@ -4,6 +4,7 @@ import { Presentacion } from 'src/app/entities/Presentacion';
 import { BaseService } from 'src/app/services/base.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { NodeWithI18n } from '@angular/compiler';
 
 @Component({
   selector: 'app-presentations',
@@ -16,12 +17,17 @@ export class PresentationsComponent implements OnInit {
   user!: SocialUser;
   presentacionNueva: Presentacion = {
     nombre: '', 
+    tiempoDeVida: 0,
+    fechaCreacion: '',
+    tipoTiempoDeVida: 1,
     usuarioCreador: ''
   }
 
-  constructor(private baseService: BaseService, private modalService: NgbModal, private socialAuthService: SocialAuthService,private toastr: ToastrService) {
+  constructor(private baseService: BaseService, private modalService: NgbModal, 
+    private socialAuthService: SocialAuthService,private toastr: ToastrService) {
     
   }
+  
   ngOnInit(): void {
     this.socialAuthService.authState
       .subscribe(res => {
