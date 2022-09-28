@@ -36,17 +36,3 @@ npm install -g @angular/cli
 npm install
 ```
 
-<h4>Creación de tablas en la Base de datos:</h4>
-Las migraciones en Entity Framework nos permite crear o actualizar el modelo de la base de datos. 
-Para poder generar las tablas a partir de las migraciones dadas, lo que debemos hacer es lo siguiente: <br>
-1) Abrir Visual Studio <br>
-2) Abrir la consula de Nuget (nuestro gestor de dependencias): <br>
-     - Tools <br>
-     - Nuget Package Manager<br>
-     - Package Manager Console<br>
-3) Ejecutar <br>
-
-
-```
-Update-Database
-```
