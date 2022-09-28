@@ -1,5 +1,5 @@
 # UNQMeter - FrontEnd
-Decisiones de desarrollo: 
+<h4>Decisiones de desarrollo:</h4> 
 
 * c# v.10
 * .NET Core 6
@@ -13,7 +13,7 @@ Decisiones de desarrollo:
 Hemos decidido trabajar con lo mencionado anteriormente, ya que ambos trabajamos actualmente en ello y nos sentimos comodos utilizando estas herramientas. Evitando de esta forma, el tener que aprender o familiarizarse de nuevo con un lenguaje o framework web. 
 
 
-Métodos HTTP: 
+<h4>Métodos HTTP:</h4> 
 
 * <b>POST:</b> /api/Login/ExternalLogin <br>
 Método utilizado para el login con google
@@ -24,3 +24,14 @@ Método utilizado para obtener todas las presentaciones realizadas por la person
 * <b>POST:</b> /api/Presentation/PostNuevaPresentacion <br>
 Método utilizado para generar una nueva presentación
 
+<h4>Instalación del ambiente de desarrollo:</h4>
+
+1. Instalar Node.js
+2. Desde la consola ejecutar:
+```
+npm install -g @angular/cli
+```
+3. Instalar las dependencias encontradas en ./node_modules
+```
+npm install
+```
