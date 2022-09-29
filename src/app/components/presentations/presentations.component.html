@@ -16,20 +16,20 @@
         <div class="col-md-12">
             <table class="table table-hover">
                 <thead class="bg-light">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Fecha creación</th>
-                    <th>Acciones</th>
-                </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha creación</th>
+                        <th>Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let presentacion of presentaciones">
-                        <td>{{presentacion.nombre}}</td>  
-                        <td>{{presentacion.fechaCreacion}}</td>  
-                        <td></td>  
+                        <td>{{presentacion.nombre}}</td>
+                        <td>{{presentacion.fechaCreacion}}</td>
+                        <td></td>
                     </tr>
                     <tr *ngIf="!presentaciones.length">
-                        <td>No hay presentaciones todavia</td>  
+                        <td>No hay presentaciones todavia</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -37,7 +37,6 @@
             </table>
         </div>
     </div>
-
     <ng-template #mymodal let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Crear nueva presentacion</h4>
@@ -45,36 +44,38 @@
                 &times;
             </button>
         </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="firstName">Título</label>
-                    <input type="text" class="form-control" [(ngModel)]="presentacionNueva.nombre" name="nombre" id="titulo"
-                        required>
-                    <div class="invalid-feedback">El título es requerido</div>
+        <form [formGroup]="formPresentacion" (ngSubmit)="savePresentacion();" novalidate>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="firstName">Título</label>
+                        <input type="text" class="form-control" [(ngModel)]="presentacionNueva.nombre" name="nombre"
+                            id="titulo" formControlName="nombre" required>
+                        <div *ngIf="this.formPresentacion.get('nombre')?.errors?.['required']" class="text-danger">
+                            {{nombreError}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="firstName">Tiempo de vida</label>
+                        <input type="number" class="form-control" [(ngModel)]="presentacionNueva.tiempoDeVida"
+                            name="tiempoDeVida" formControlName="tiempoDeVida" id="tiempoDeVida" required>
+                        <div *ngIf="this.formPresentacion.get('tiempoDeVida')?.errors?.['required']"
+                            class="text-danger">{{tiempoDeVidaError}}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="firstName">Tipo</label>
+                        <select class="form-select" [(ngModel)]="presentacionNueva.tipoTiempoDeVida"
+                            name="tipoTiempoDeVida" id="tipoTiempoDeVida" formControlName="tipoTiempoDeVida" required>
+                            <option selected="selected" value="1">Horas</option>
+                            <option value="2">Días</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="firstName">Tiempo de vida</label>
-                    <input type="number" class="form-control" [(ngModel)]="presentacionNueva.tiempoDeVida"
-                        name="tiempoDeVida" id="tiempoDeVida" required>
-                    <div class="invalid-feedback">El Tiempo de vida es requerido</div>
-                </div>
-                <div class="col-md-6">
-                    <label for="firstName">Tipo</label>
-                    <select class="form-select" [(ngModel)]="presentacionNueva.tipoTiempoDeVida" name="tipoTiempoDeVida"
-                        id="tipoTiempoDeVida" required>
-                        <option selected="selected" value="1">Horas</option>
-                        <option value="2">Días</option>
-                    </select>
-                </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary"
-                (click)="savePresentacion(); modal.close('Save click')">Guardar</button>
-        </div>
+        </form>
     </ng-template>
 </div>
-
