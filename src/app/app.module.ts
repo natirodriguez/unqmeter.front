@@ -34,6 +34,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     HttpClientModule,
     SocialLoginModule,
