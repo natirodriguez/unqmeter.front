@@ -31,6 +31,7 @@ export class PresentationsComponent implements OnInit {
     tiempoDeVida: new FormControl('', [Validators.required]),
     tipoTiempoDeVida: new FormControl('', [Validators.required])
   });
+  userEmail: string;
 
   constructor(private baseService: BaseService, private modalService: NgbModal,  
     private socialAuthService: SocialAuthService,private toastr: ToastrService) {
@@ -38,12 +39,14 @@ export class PresentationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socialAuthService.authState
-      .subscribe(res => {
-        this.user = res;
-      })
 
-      this.baseService.getMisPresentaciones(this.user).subscribe(
+    // this.socialAuthService.authState
+    //   .subscribe(res => {
+    //     this.user = res;
+    //   })
+      this.userEmail = localStorage.getItem("userEmail");
+
+      this.baseService.getMisPresentaciones(this.userEmail).subscribe(
         (res: Presentacion[]) => this.presentaciones = res);  
   }
 
@@ -57,7 +60,7 @@ export class PresentationsComponent implements OnInit {
 
   savePresentacion() {
     if (this.formPresentacion.valid){
-      this.presentacionNueva.usuarioCreador = this.user.email;
+      this.presentacionNueva.usuarioCreador = this.userEmail;
       this.baseService.savePresentacion(this.presentacionNueva).subscribe((res : any) =>{
         if (res.status == 200) {
           this.toastr.success('Se realizo la operación con exito');

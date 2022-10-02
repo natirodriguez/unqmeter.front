@@ -64,8 +64,8 @@ export function tokenGetter() {
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider(
-            '590740812763-1sdtatroamhhu680qoa8vegbkubjkq72.apps.googleusercontent.com'
-          )
+            '590740812763-1sdtatroamhhu680qoa8vegbkubjkq72.apps.googleusercontent.com',{oneTapEnabled: false}
+          ),
         },
       ],
       onError: (err) => {

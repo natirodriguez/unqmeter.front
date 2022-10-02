@@ -9,8 +9,8 @@
       />
       <span>¡UNQMeter!</span>
       <div class="spacer"></div>
-      <button class="btn btn-primary m-3" [routerLink]="['/login']" *ngIf="user == null">LogIn</button>
-      <button class="btn btn-danger m-3" (click)="signOut()" *ngIf="user != null">Log out</button>
+      <button class="btn btn-primary m-3" [routerLink]="['/login']" *ngIf="!loggedIn">LogIn</button>
+      <button class="btn btn-danger m-3" (click)="signOut()" *ngIf="loggedIn">Log out</button>
 
 </div>
 <div class="content" role="main">

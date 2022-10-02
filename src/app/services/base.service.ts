@@ -34,14 +34,14 @@ import { Router } from '@angular/router';
 
     Controller = 'Presentation/';
 
-    getMisPresentaciones(user: SocialUser) : Observable<Presentacion[]> {
+    getMisPresentaciones(email: string) : Observable<Presentacion[]> {
       var subPath = 'GetMisPresentaciones';
-      const body=JSON.stringify(user);
+      const body=JSON.stringify(email);
 
       return this.http.get<Presentacion[]>(this.unqMeterUrl
           .concat(this.Controller)
           .concat(subPath)
-          .concat("/"+ user.email));
+          .concat("/"+ email));
     }
 
     savePresentacion(presentacion: Presentacion){

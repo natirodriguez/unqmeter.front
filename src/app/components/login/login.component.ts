@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
             }
             this.validateExternalAuth(externalAuth);
       }
-      this.user = user;
-      this.newItemEvent.emit(user);
+      localStorage.setItem("userEmail", user.email);
     });
     this.returnUrl = '/presentations';
   }
