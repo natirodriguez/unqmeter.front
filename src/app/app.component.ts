@@ -18,31 +18,12 @@ export class AppComponent implements OnInit{
   returnUrl = '/presentations';
   loggedIn = false;
   
-  constructor(private baseService: BaseService,private socialAuthService: SocialAuthService, private authService: AuthenticationService, private router: Router,private jwtHelper: JwtHelperService,) {
+  constructor() {
   }
 
   title = '';
 
   ngOnInit(): void {
-    var userEmail = localStorage.getItem("userEmail");
-    if (userEmail != null){
-      this.loggedIn = true;
-    }
-      this.socialAuthService.authState
-      .subscribe(res => {
-        if(res != null){
-          this.loggedIn = true;
-          this.router.navigate([this.returnUrl]);
-        }
-      })
   }
-
-  signOut(): void {
-    this.loggedIn = false;
-    localStorage.clear();
-    this.socialAuthService.signOut();
-    this.router.navigate(['/']);
-  }
-
 }
 

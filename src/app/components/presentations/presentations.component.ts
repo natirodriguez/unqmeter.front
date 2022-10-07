@@ -6,6 +6,7 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import { NodeWithI18n } from '@angular/compiler';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-presentations',
@@ -17,6 +18,7 @@ export class PresentationsComponent implements OnInit {
   closeResult: string = '';
   user!: SocialUser;
   presentacionNueva: Presentacion = {
+    id: 0,
     nombre: '', 
     tiempoDeVida: 0,
     fechaCreacion: '',
@@ -32,19 +34,18 @@ export class PresentationsComponent implements OnInit {
     tipoTiempoDeVida: new FormControl('', [Validators.required])
   });
   userEmail: string;
+  loggedIn = false;
 
   constructor(private baseService: BaseService, private modalService: NgbModal,  
-    private socialAuthService: SocialAuthService,private toastr: ToastrService) {
-    
+    private socialAuthService: SocialAuthService,private toastr: ToastrService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.userEmail = localStorage.getItem("userEmail");
 
-    // this.socialAuthService.authState
-    //   .subscribe(res => {
-    //     this.user = res;
-    //   })
-      this.userEmail = localStorage.getItem("userEmail");
+    if (this.userEmail != null){
+      this.loggedIn = true;
+    }
 
       this.baseService.getMisPresentaciones(this.userEmail).subscribe(
         (res: Presentacion[]) => this.presentaciones = res);  
@@ -75,7 +76,14 @@ export class PresentationsComponent implements OnInit {
       this.tiempoDeVidaError = "El Tiempo de vida es requerido";
     }
   }
-
+  
+  signOut(): void {
+    this.loggedIn = false;
+    localStorage.clear();
+    this.socialAuthService.signOut();
+    this.router.navigate(['/']);
+  }
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

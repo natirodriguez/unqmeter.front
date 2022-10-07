@@ -20,7 +20,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private configService : ConfigService, 
     private jwtHelper: JwtHelperService, private externalAuthService: SocialAuthService) { 
       this.externalAuthService.authState.subscribe((user) => {
-        console.log(user);
+        localStorage.setItem("userName", user.name);
         this.extAuthChangeSub.next(user);
         this.isExternalAuth = true;
       })

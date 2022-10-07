@@ -1,22 +1,39 @@
-<div class="content" role="main">
-  <div class="container">
-    <div class="row mt-4 text-center">
-      <div class="col-md-12">
-        <h1>
-          Involucra a tu audiencia y <br /> haz que todos participen activamente.
-        </h1>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-md-12 col-md-pr-pl-0">
+      <div class="navbar navbar-expand-lg bg-light justify-content-between navbar-height">
+        <span>
+          <img role="button"
+        width="40"
+        alt="Angular Logo"
+        [routerLink]="['/']"
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+        />
+        <span>¡UNQMeter!</span>
+        </span>
+        
+        <button class="btn btn-primary m-3" [routerLink]="['/login']" *ngIf="!loggedIn">LogIn</button>
+        <button class="btn btn-primary m-3" [routerLink]="['/presentations']" *ngIf="loggedIn">Mis Presentaciones</button>
       </div>
-    </div>
-    <div class="row mt-4 mb-5 text-center">
-      <div class="col-md-12">
-        <h4 class="text-grey">
-          Nuestras presentaciones fáciles de crear, encuestas interactivas, cuestionarios y <br /> nubes de palabras significan más participación y mucha diversión.
-        </h4>
-      </div>
-    </div>
-    <div class="row text-center">
-      <div class="container-fluid">
-        <iframe width="860" height="400" src="https://www.youtube.com/embed/X1VW5uVrQTM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    </div>
     </div>
   </div>
-</div> 
+  <div class="row mt-4 text-center">
+    <div class="col-md-12">
+      <h1>
+        Involucra a tu audiencia y <br /> haz que todos participen activamente.
+      </h1>
+    </div>
+  </div>
+  <div class="row mt-4 mb-5 text-center">
+    <div class="col-md-12">
+      <h4 class="text-grey">
+        Nuestras presentaciones fáciles de crear, encuestas interactivas, cuestionarios y <br /> nubes de palabras significan más participación y mucha diversión.
+      </h4>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="container-fluid">
+      <iframe width="860" height="400" src="https://www.youtube.com/embed/X1VW5uVrQTM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>    
+</div>

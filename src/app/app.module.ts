@@ -16,6 +16,7 @@ import { PresentationsComponent } from './components/presentations/presentations
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PresentationEditionComponent } from './components/presentation-edition/presentation-edition.component';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -30,7 +31,8 @@ export function tokenGetter() {
     AppComponent,
     HomePageComponent,
     LoginComponent,
-    PresentationsComponent
+    PresentationsComponent,
+    PresentationEditionComponent
   ],
   imports: [
     BrowserModule,
