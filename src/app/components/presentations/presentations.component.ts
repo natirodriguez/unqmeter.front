@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class PresentationsComponent implements OnInit {
   presentaciones: Presentacion[] = [];
+  modalReference: any;
   closeResult: string = '';
   user!: SocialUser;
   presentacionNueva: Presentacion = {
@@ -47,12 +48,13 @@ export class PresentationsComponent implements OnInit {
       this.loggedIn = true;
     }
 
-      this.baseService.getMisPresentaciones(this.userEmail).subscribe(
-        (res: Presentacion[]) => this.presentaciones = res);  
+    this.refreshTable();
   }
 
   open(content:any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalReference = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    
+    this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -64,6 +66,8 @@ export class PresentationsComponent implements OnInit {
       this.presentacionNueva.usuarioCreador = this.userEmail;
       this.baseService.savePresentacion(this.presentacionNueva).subscribe((res : any) =>{
         if (res.status == 200) {
+          this.modalReference.close();
+          this.refreshTable();
           this.toastr.success('Se realizo la operación con exito');
         }
         else {
@@ -76,12 +80,29 @@ export class PresentationsComponent implements OnInit {
       this.tiempoDeVidaError = "El Tiempo de vida es requerido";
     }
   }
+
+  clonarPresentacion(presentacion: Presentacion) {
+    this.baseService.clonarPresentacion(presentacion).subscribe((res : any) =>{
+      if (res.status == 200) {
+        this.toastr.success('Se realizo la operación con exito');
+        this.refreshTable();
+      }
+      else {
+        this.toastr.error('Error al realizar la operación');
+      }
+    });
+  }
   
   signOut(): void {
     this.loggedIn = false;
     localStorage.clear();
     this.socialAuthService.signOut();
     this.router.navigate(['/']);
+  }
+
+  private refreshTable(){
+    this.baseService.getMisPresentaciones(this.userEmail).subscribe(
+      (res: Presentacion[]) => this.presentaciones = res);  
   }
   
   private getDismissReason(reason: any): string {

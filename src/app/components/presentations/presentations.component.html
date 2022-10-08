@@ -23,8 +23,8 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-primary" (click)="open(mymodal)">
-                    Crear
+                <button class="btn btn-primary" (click)="open(mymodal);">
+                    <i class="bi bi-plus-circle"></i> Crear
                 </button>
             </div>
         </div>
@@ -43,7 +43,11 @@
                         <tr *ngFor="let presentacion of presentaciones">
                             <td><button class="btn btn-link" [routerLink]="['/presentation-edition',presentacion.id]">{{presentacion.nombre}}</button></td>
                             <td>{{presentacion.fechaCreacion}}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-link" (click)="clonarPresentacion(presentacion);">
+                                    <i class="bi bi-files"></i>Clonar
+                                </button>
+                            </td>
                         </tr>
                         <tr *ngIf="!presentaciones.length">
                             <td>No hay presentaciones todavia</td>
