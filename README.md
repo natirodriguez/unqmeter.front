@@ -21,8 +21,14 @@ Método utilizado para el login con google
 * <b>GET:</b> /api/Presentation/GetMisPresentaciones/{email} <br>
 Método utilizado para obtener todas las presentaciones realizadas por la persona con el email pasado por parametro.
 
+* <b>GET:</b> /api/Presentation/GetPresentacion/{id} <br>
+Método utilizado para obtener la presentación correspondiente al id pasado por parametro.
+
 * <b>POST:</b> /api/Presentation/PostNuevaPresentacion <br>
 Método utilizado para generar una nueva presentación
+
+* <b>POST:</b> /api/Presentation/GetClonarPresentacion/ <br>
+Método utilizado para clonar la presentación que tenga determinado Id. Clona la presentación, la slyde y las opciones slyde correspondientes.
 
 <h4>Instalación del ambiente de desarrollo:</h4>
 
