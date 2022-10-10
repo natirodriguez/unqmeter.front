@@ -64,4 +64,16 @@ import { Router } from '@angular/router';
           .concat(subPath)
           .concat("/"+ id));
     }
+    
+    clonarPresentacion(presentacion: Presentacion){
+      var subPath = 'PostClonarPresentacion';
+      const body= JSON.stringify(presentacion.id);
+
+      return this.http.post(this.unqMeterUrl
+        .concat(this.Controller)
+        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
+        .pipe(
+          catchError(err => of([]))
+      );
+    }
 }
