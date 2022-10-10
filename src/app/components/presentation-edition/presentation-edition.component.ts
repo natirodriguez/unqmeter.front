@@ -1,7 +1,9 @@
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Presentacion } from 'src/app/entities/Presentacion';
+import { Slyde } from 'src/app/entities/Slyde';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BaseService } from 'src/app/services/base.service';
 
 @Component({
   selector: 'presentation-edition',
@@ -10,12 +12,23 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class PresentationEditionComponent implements OnInit {
   userName: string;
+  presentacion: Presentacion;
+  slydes : Slyde[];
 
-  constructor(private route: ActivatedRoute,private authService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService) { }
 
   ngOnInit(): void {
     const presentationId = this.route.snapshot.paramMap.get('id');
+    this.getPresentacion(Number(presentationId));
     this.userName = localStorage.getItem("userName");
+    this.slydes = [];
+    this.slydes.push(new Slyde());
+  }
+
+  public getPresentacion(id: number){
+    this.baseService.getPresentacion(id).subscribe(
+      (res: Presentacion) => 
+        this.presentacion = res);
   }
 
 }

@@ -55,4 +55,13 @@ import { Router } from '@angular/router';
           catchError(err => of([]))
       );
     }
+
+    getPresentacion(id: number) : Observable<Presentacion> {
+      var subPath = 'GetPresentacion';
+
+      return this.http.get<Presentacion>(this.unqMeterUrl
+          .concat(this.Controller)
+          .concat(subPath)
+          .concat("/"+ id));
+    }
 }

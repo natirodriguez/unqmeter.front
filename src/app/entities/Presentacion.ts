@@ -1,6 +1,3 @@
-import { NgModule } from '@angular/core';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-
 export class Presentacion{
     public id: number;
     public nombre!: string;

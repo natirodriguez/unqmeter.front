@@ -1,19 +1,67 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 col-md-pr-pl-0">
-      <nav class="navbar navbar-expand-lg bg-light justify-content-between navbar-height">
-          <button class="btn btn-outline-secondary m-3" type="button" [routerLink]="['/presentations']"><i class="bi bi-arrow-left"></i></button>
+      <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
+          <button class="btn btn-outline-secondary" type="button" [routerLink]="['/presentations']"><i class="bi bi-arrow-left"></i></button>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item m-2">
-                Primer presentacion <br />
-                Creada por {{userName}}
+                <strong class="fs-6" *ngIf="presentacion != null">{{presentacion.nombre}}</strong><br />
+                <small class="color-grey">Creada por {{userName}}</small>
               </li>
             </ul>
             <form class="d-flex m-3" role="search">
               <button type="button" class="btn btn-secondary me-2"><i class="bi bi-share"></i> Compartir</button>
               <button type="button" class="btn btn-primary"><i class="bi bi-play-fill"></i> Presentar</button>
             </form>
+      </nav>
+      <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
+        <button class="btn btn-primary" type="button"><i class="bi bi-plus"></i> Nueva diapositiva</button>
       </nav> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <div class="card" style="width: 10rem;" *ngFor="let slyde of slydes; let i=index;"
+          i slyde.id>
+          <button type="button" class="btn btn-outline-primary">
+            <i class="bi bi-cloudy-fill fs-1"></i> <br />
+              Work Cloud
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 background-grey">
+
+    </div>
+    <div class="col-md-4">
+      <div class="row border-bottom border-secondary">
+        <div class="col-md-12">
+          <label class="form-label pt-2">Tipo de slyde</label>
+          <select class="form-select mb-4">
+            <option selected>Work Cloud</option>
+            <option value="1">Multiple Choice</option>
+            <option value="2">Ranking</option>
+            <option value="3">Texto abierto</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item width-200" role="presentation">
+              <button class="nav-link active w-100" id="contenido-tab" data-bs-toggle="tab" data-bs-target="#contenido-tab-pane" type="button" role="tab" aria-controls="contenido-tab-pane" aria-selected="true">Contenido</button>
+            </li>
+            <li class="nav-item width-200" role="presentation">
+              <button class="nav-link w-100" id="personalizar-tab" data-bs-toggle="tab" data-bs-target="#personalizar-tab-pane" type="button" role="tab" aria-controls="personalizar-tab-pane" aria-selected="false">Personalizar</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="contenido-tab-pane" role="tabpanel" aria-labelledby="contenido-tab" tabindex="0">...</div>
+            <div class="tab-pane fade" id="personalizar-tab-pane" role="tabpanel" aria-labelledby="personalizar-tab" tabindex="0">...</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
