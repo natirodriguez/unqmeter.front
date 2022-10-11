@@ -6,6 +6,7 @@ import { Message } from "../entities/Message";
 import { Presentacion } from "../entities/Presentacion";
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
+import { TipoPregunta } from "../entities/TipoPregunta";
 
 @Injectable({
     providedIn: 'root'
@@ -75,5 +76,13 @@ import { Router } from '@angular/router';
         .pipe(
           catchError(err => of([]))
       );
+    }
+
+    getTipoPreguntas() : Observable<TipoPregunta[]>{
+      var subPath = 'GetTipoPreguntas';
+
+      return this.http.get<TipoPregunta[]>(this.unqMeterUrl
+          .concat(this.Controller)
+          .concat(subPath));
     }
 }

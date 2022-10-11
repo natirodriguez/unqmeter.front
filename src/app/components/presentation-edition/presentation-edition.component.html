@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid h-100">
   <div class="row">
     <div class="col-md-12 col-md-pr-pl-0">
       <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
@@ -16,14 +16,13 @@
       </nav>
       <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
         <button class="btn btn-primary" type="button"><i class="bi bi-plus"></i> Nueva diapositiva</button>
-      </nav> 
+      </nav>
     </div>
   </div>
-  <div class="row">
+  <div class="row h-75">
     <div class="col-md-2">
       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <div class="card" style="width: 10rem;" *ngFor="let slyde of slydes; let i=index;"
-          i slyde.id>
+        <div class="card" style="width: 10rem;" *ngFor="let slyde of slydes; let i=index;">
           <button type="button" class="btn btn-outline-primary">
             <i class="bi bi-cloudy-fill fs-1"></i> <br />
               Work Cloud
@@ -38,11 +37,10 @@
       <div class="row border-bottom border-secondary">
         <div class="col-md-12">
           <label class="form-label pt-2">Tipo de slyde</label>
-          <select class="form-select mb-4">
-            <option selected>Work Cloud</option>
-            <option value="1">Multiple Choice</option>
-            <option value="2">Ranking</option>
-            <option value="3">Texto abierto</option>
+          <select class="form-select mb-4" [(ngModel)]="tipoPreguntaSel">
+            <option *ngFor="let tipo of tiposPregunta">
+              {{tipo.descripcion}}
+            </option>
           </select>
         </div>
       </div>
