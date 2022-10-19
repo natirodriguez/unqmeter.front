@@ -78,6 +78,18 @@ import { TipoPregunta } from "../entities/TipoPregunta";
       );
     }
 
+    compartirPresentacion(presentacion: Presentacion){
+      var subPath = 'PostCompartirPresentacion';
+      const body= JSON.stringify(presentacion.id);
+
+      return this.http.post(this.unqMeterUrl
+        .concat(this.Controller)
+        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
+        .pipe(
+          catchError(err => of([]))
+      );
+    }
+
     getTipoPreguntas() : Observable<TipoPregunta[]>{
       var subPath = 'GetTipoPreguntas';
 

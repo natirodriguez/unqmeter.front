@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Presentacion } from 'src/app/entities/Presentacion';
 import { BaseService } from 'src/app/services/base.service';
@@ -24,7 +24,8 @@ export class PresentationsComponent implements OnInit {
     tiempoDeVida: 0,
     fechaCreacion: '',
     tipoTiempoDeVida: 1,
-    usuarioCreador: ''
+    usuarioCreador: '', 
+    tipoTiempoDeVidaDescripcion: ''
   }
 
   nombreError!: string; 
