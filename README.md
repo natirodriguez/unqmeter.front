@@ -30,6 +30,9 @@ Método utilizado para generar una nueva presentación
 * <b>POST:</b> /api/Presentation/GetClonarPresentacion/ <br>
 Método utilizado para clonar la presentación que tenga determinado Id. Clona la presentación, la slyde y las opciones slyde correspondientes.
 
+* <b>POST:</b> /api/Presentation/PostCompartirPresentacion <br>
+Método utilizado para setear la fecha de inicio y fin de la presentación, según lo cargado en los parametros tiempo de vida. 
+
 <h4>Instalación del ambiente de desarrollo:</h4>
 
 1) Instalar Node.js

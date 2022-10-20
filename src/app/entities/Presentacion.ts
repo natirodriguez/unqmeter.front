@@ -5,4 +5,5 @@ export class Presentacion{
     public fechaCreacion!: string;
     public tiempoDeVida!: number;
     public tipoTiempoDeVida!: number;
+    public tipoTiempoDeVidaDescripcion!: string;
 }

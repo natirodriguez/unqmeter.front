@@ -5,6 +5,8 @@ import { Slyde } from 'src/app/entities/Slyde';
 import { TipoPregunta } from 'src/app/entities/TipoPregunta';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { BaseService } from 'src/app/services/base.service';
+import { SharePresentacionComponent } from '../share-presentacion/share-presentacion.component';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'presentation-edition',
@@ -17,11 +19,13 @@ export class PresentationEditionComponent implements OnInit {
   slydes : Slyde[];
   tiposPregunta : TipoPregunta[];
   tipoPreguntaSel : number;
+  modalReference: any;
+  closeResult: string = '';
   currentSlyde : Slyde;
   presentationId : string;
   questionTypeSelected : number;
 
-  constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService) { }
+  constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this. presentationId = this.route.snapshot.paramMap.get('id');
@@ -44,6 +48,27 @@ export class PresentationEditionComponent implements OnInit {
     this.baseService.getTipoPreguntas().subscribe(
       (res: TipoPregunta[]) => 
         this.tiposPregunta = res);
+  }
+
+  openShare(presentacion: Presentacion){
+    this.modalReference = this.modalService.open(SharePresentacionComponent, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalReference.componentInstance.presentacion = presentacion;
+
+    this.modalReference.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });  
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
   public getSlydesPresentation(idPresentation: number){
