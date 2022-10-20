@@ -24,6 +24,9 @@ Método utilizado para obtener todas las presentaciones realizadas por la person
 * <b>GET:</b> /api/Presentation/GetPresentacion/{id} <br>
 Método utilizado para obtener la presentación correspondiente al id pasado por parametro.
 
+* <b>GET:</b> /api/GetSlydesByIdPresentation/{presentationId} <br>
+Método utilizado para obtener las slydes correspondientes a una determinada presentacion, pasando por parametro su Id.
+
 * <b>POST:</b> /api/Presentation/PostNuevaPresentacion <br>
 Método utilizado para generar una nueva presentación
 
@@ -32,6 +35,9 @@ Método utilizado para clonar la presentación que tenga determinado Id. Clona l
 
 * <b>POST:</b> /api/Presentation/PostCompartirPresentacion <br>
 Método utilizado para setear la fecha de inicio y fin de la presentación, según lo cargado en los parametros tiempo de vida. 
+
+* <b>POST:</b> /api/Presentation/SaveSlyde <br>
+Método utilizado para guardar una slyde.
 
 <h4>Instalación del ambiente de desarrollo:</h4>
 
