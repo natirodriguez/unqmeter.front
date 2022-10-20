@@ -1,5 +1,9 @@
 export class Slyde{
     public id: number;
-    public PresentacionId: number;
-    public TipoPregunta: number;
+    public presentacionId: number;
+    public tipoPregunta: number;
+
+    public constructor(tipoPregunta : number){
+        this.tipoPregunta = tipoPregunta;
+    }
 }

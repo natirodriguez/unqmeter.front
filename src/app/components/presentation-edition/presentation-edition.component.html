@@ -15,17 +15,50 @@
             </form>
       </nav>
       <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
-        <button class="btn btn-primary" type="button"><i class="bi bi-plus"></i> Nueva diapositiva</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#slydeModal">
+          Nueva Diapositiva
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="slydeModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="slydeModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="slydeModalLabel">Crear Diapositiva</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6 mb-1" *ngFor="let tipo of tiposPregunta">
+                    <div class="card">
+                      <button class="btn btn-secondary" (click)="questionTypeSelected = tipo.codigo">{{tipo.descripcion}}</button>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveSlyde()">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
   </div>
   <div class="row h-75">
     <div class="col-md-2">
-      <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <div class="card" style="width: 10rem;" *ngFor="let slyde of slydes; let i=index;">
-          <button type="button" class="btn btn-outline-primary">
-            <i class="bi bi-cloudy-fill fs-1"></i> <br />
-              Work Cloud
+      <div class="btn-group-vertical w-100" role="group" aria-label="Vertical button group">
+        <div class="card w-100" *ngFor="let slyde of slydes; let i=index;">
+          <button type="button" class="btn btn-outline-primary" (click)="setCurrentSlyde(slyde)">
+            <!-- <i class="bi bi-cloudy-fill fs-1"></i> <br /> -->
+            <select disabled class="form-control select-custom text-center">
+              <option *ngFor="let tipo of tiposPregunta" [selected]="tipo.codigo === slyde.tipoPregunta">
+                {{tipo.descripcion}}
+              </option>
+            </select>
           </button>
         </div>
       </div>
@@ -37,8 +70,8 @@
       <div class="row border-bottom border-secondary">
         <div class="col-md-12">
           <label class="form-label pt-2">Tipo de slyde</label>
-          <select class="form-select mb-4" [(ngModel)]="tipoPreguntaSel">
-            <option *ngFor="let tipo of tiposPregunta">
+          <select class="form-select mb-4" [(ngModel)]="tipoPreguntaSel" (change)="changeType()">
+            <option *ngFor="let tipo of tiposPregunta" [value]="tipo.codigo">
               {{tipo.descripcion}}
             </option>
           </select>

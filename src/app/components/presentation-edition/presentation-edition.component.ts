@@ -16,17 +16,22 @@ export class PresentationEditionComponent implements OnInit {
   presentacion: Presentacion;
   slydes : Slyde[];
   tiposPregunta : TipoPregunta[];
-  tipoPreguntaSel : TipoPregunta;
-  
+  tipoPreguntaSel : number;
+  currentSlyde : Slyde;
+  presentationId : string;
+  questionTypeSelected : number;
+
   constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService) { }
 
   ngOnInit(): void {
-    const presentationId = this.route.snapshot.paramMap.get('id');
-    this.getPresentacion(Number(presentationId));
+    this. presentationId = this.route.snapshot.paramMap.get('id');
+    this.getPresentacion(Number(this.presentationId));
     this.getTipoPreguntas();
+    this.getSlydesPresentation(Number(this.presentationId));
     this.userName = localStorage.getItem("userName");
-    this.slydes = [];
-    this.slydes.push(new Slyde());
+    this.baseService.refreshRequired.subscribe( res =>
+      this.getSlydesPresentation(Number(this.presentationId))
+    );
   }
 
   public getPresentacion(id: number){
@@ -40,4 +45,29 @@ export class PresentationEditionComponent implements OnInit {
       (res: TipoPregunta[]) => 
         this.tiposPregunta = res);
   }
+
+  public getSlydesPresentation(idPresentation: number){
+    this.baseService.getSlydesPresentation(idPresentation).subscribe(
+      (res: Slyde[]) => {
+        this.slydes = res;
+        this.currentSlyde = res[0];
+        this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
+      });
+  }
+
+  public saveSlyde(){
+    var slyde = new Slyde(this.questionTypeSelected)
+    slyde.presentacionId = Number(this.presentationId);
+
+    this.baseService.saveSlyde(slyde).subscribe();
+  }
+  
+  changeType(){
+    this.currentSlyde.tipoPregunta = Number(this.tipoPreguntaSel);
+  }
+
+  setCurrentSlyde(slyde : Slyde){
+      this.currentSlyde = slyde;
+  }
+  
 }
