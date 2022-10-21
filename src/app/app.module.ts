@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PresentationEditionComponent } from './components/presentation-edition/presentation-edition.component';
 import { SharePresentacionComponent } from './components/share-presentacion/share-presentacion.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -45,6 +46,7 @@ export function tokenGetter() {
     SocialLoginModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ClipboardModule,
     ToastrModule.forRoot(),
     FormsModule,
     JwtModule.forRoot({

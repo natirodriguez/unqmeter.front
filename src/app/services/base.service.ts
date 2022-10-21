@@ -113,6 +113,15 @@ import { Slyde } from "../entities/Slyde";
           .concat("/" + idPresentation));
     }
 
+    getEstaVencidaLaPresentacion(idPresentation : number) : Observable <boolean>{
+      var subPath = 'EstaVencidaLaPresentacion';
+
+      return this.http.get<boolean>(this.unqMeterUrl
+          .concat(this.Controller)
+          .concat(subPath)
+          .concat("/" + idPresentation));
+    }
+
     saveSlyde(slyde: Slyde) : Observable <any>{
       var subPath = 'SaveSlyde';
       const body= JSON.stringify(slyde);

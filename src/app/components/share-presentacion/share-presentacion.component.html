@@ -5,11 +5,25 @@
         </button>
     </div>
     <div class="modal-body">
-        <div class="row">
+        <div class="row" *ngIf="!estaVencida">
             <div class="col-md-12">
                 <label for="tiempoDeVida">La presentación tiene un tiempo de vida de {{presentacion.tiempoDeVida}} {{presentacion.tipoTiempoDeVidaDescripcion}}.</label>
                 <br>
                 <label for="diaExpiracion">La fecha de expiración es el {{fechaFin | date: 'dd/MM/yyyy h:mm a z'}}.</label>
+                <br><br>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" [(ngModel)]="direccionURL" [disabled]="true" name="url" id="url">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" [cdkCopyToClipboard]="direccionURL">Copiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="estaVencida">
+            <div class="col-md-12">
+                <label for="diaExpiracion">La presentación vencio el día {{fechaFin | date: 'dd/MM/yyyy h:mm a z'}}. </label>
+                <label for="msj" style="text-align: justify;">Para volver a trabajar sobre la misma, por favor clonela. Es importante que al momento 
+                    de clonar la presentación se perderá las respuestas de los usuarios.</label>
             </div>
         </div>
     </div>
