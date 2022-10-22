@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PresentationEditionComponent } from './components/presentation-edition/presentation-edition.component';
 import { SharePresentacionComponent } from './components/share-presentacion/share-presentacion.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ResponderPresentacionComponent } from './components/responder-presentacion/responder-presentacion.component';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -35,14 +36,14 @@ export function tokenGetter() {
     LoginComponent,
     PresentationsComponent,
     PresentationEditionComponent,
-    SharePresentacionComponent
+    SharePresentacionComponent,
+    ResponderPresentacionComponent
   ],
   entryComponents:[SharePresentacionComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    HttpClientModule,
     SocialLoginModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

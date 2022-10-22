@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col-md-12 col-md-pr-pl-0">
+            <div class="navbar navbar-expand-lg bg-light justify-content-between navbar-height">
+                <span>
+                  <img role="button"
+                width="40"
+                alt="Angular Logo"
+                [routerLink]="['/']"
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+                />
+                <span>¡UNQMeter!</span>
+                </span>
+              </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row" *ngIf="estaVencida">
+            <div class="col-md-12">
+                <h3>Ya no es posible responder la presentación.</h3>
+            </div>
+        </div>
+        <div class="row" *ngIf="!estaVencida">
+            <div *ngIf="!tieneSlydeSinRespuesta">
+                <div class="col-md-12">
+                    <h3>No hay diapositivas que contestar.</h3>
+                </div>
+            </div>
+            <div *ngIf="tieneSlydeSinRespuesta">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" (click)="save();">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

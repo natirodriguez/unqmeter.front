@@ -36,6 +36,7 @@ import { Slyde } from "../entities/Slyde";
     unqMeterUrl = this.configService.config.unqMeterApiUrl;
 
     Controller = 'Presentation/';
+    ControllerRespuesta = 'RespuestaParticipante/';
 
     get refreshRequired(){
         return this._refreshRequired;
@@ -135,5 +136,16 @@ import { Slyde } from "../entities/Slyde";
           }),
           catchError(err => of([]))
       );
+    }
+
+    // Respuesta Participantes
+    getSlydesSinRespuestas(idPresentation: number, ip:string) : Observable<Slyde[]> {
+      var subPath = 'GetSlydesSinRespuestas';
+
+      return this.http.get<Slyde[]>(this.unqMeterUrl
+          .concat(this.ControllerRespuesta)
+          .concat(subPath)
+          .concat("/" + idPresentation)
+          .concat("/" + ip));
     }
 }

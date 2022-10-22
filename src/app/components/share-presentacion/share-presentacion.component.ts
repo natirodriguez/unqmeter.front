@@ -17,7 +17,7 @@ export class SharePresentacionComponent implements OnInit {
   constructor(private baseService: BaseService, public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-    this.direccionURL = 'http://localhost:4200/responder-presentacion/' + 1;
+    this.direccionURL = 'http://localhost:4200/responder-presentacion/' + this.presentacion.id;
     this.sharePresentacion();
     this.estaVencidaPresentacion();
   }
