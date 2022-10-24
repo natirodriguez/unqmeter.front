@@ -39,6 +39,10 @@ Método utilizado para setear la fecha de inicio y fin de la presentación, seg�
 * <b>POST:</b> /api/Presentation/SaveSlyde <br>
 Método utilizado para guardar una slyde.
 
+* <b>DELETE:</b> /api/Presentation/DeleteSlyde/{slydeId} <br>
+Método utilizado para eliminar la slyde correspondiente al id pasado por parametro.
+
+
 <h4>Instalación del ambiente de desarrollo:</h4>
 
 1) Instalar Node.js

@@ -37,10 +37,9 @@
                   </div>
                   </div>
                 </div>
-                
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveSlyde()">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="newSlyde()">Guardar</button>
               </div>
             </div>
           </div>
@@ -51,15 +50,17 @@
   <div class="row h-75">
     <div class="col-md-2">
       <div class="btn-group-vertical w-100" role="group" aria-label="Vertical button group">
-        <div class="card w-100" *ngFor="let slyde of slydes; let i=index;">
-          <button type="button" class="btn btn-outline-primary" (click)="setCurrentSlyde(slyde)">
-            <!-- <i class="bi bi-cloudy-fill fs-1"></i> <br /> -->
-            <select disabled class="form-control select-custom text-center">
-              <option *ngFor="let tipo of tiposPregunta" [selected]="tipo.codigo === slyde.tipoPregunta">
-                {{tipo.descripcion}}
-              </option>
-            </select>
-          </button>
+        <div class="card mt-2 w-100 d-inline  text-center" *ngFor="let slyde of slydes; let i=index;">
+            <i class="bi fs-2" [ngClass]="{'bi-bar-chart': slyde.tipoPregunta == 1,'bi-cloud': slyde.tipoPregunta == 2,'bi-bar-chart-steps': slyde.tipoPregunta == 3,'bi-chat-left-text': slyde.tipoPregunta == 4 }"></i>
+          <input type="radio" class="btn-check " name="slyde" id="{{slyde.id}}" autocomplete="off" [checked]="slyde.id == currentSlyde.id" (click)="setCurrentSlyde(slyde)">
+          <label class="btn btn-outline-primary w-100 d-inline-flex" for="{{slyde.id}}">
+            <div class="w-100 text-center">
+              {{slyde.descripcionPregunta}}
+            </div>
+            <div class="text-align-end">
+              <button class="btn btn-outline-danger p-0 border-0" (click)="deleteSlyde(slyde.id)"><i class="bi bi-trash-fill"></i></button>
+            </div>
+            </label>
         </div>
       </div>
     </div>

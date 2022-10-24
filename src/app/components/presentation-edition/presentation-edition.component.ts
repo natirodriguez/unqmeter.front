@@ -21,7 +21,7 @@ export class PresentationEditionComponent implements OnInit {
   tipoPreguntaSel : number;
   modalReference: any;
   closeResult: string = '';
-  currentSlyde : Slyde;
+  currentSlyde : Slyde = null;
   presentationId : string;
   questionTypeSelected : number;
 
@@ -75,24 +75,45 @@ export class PresentationEditionComponent implements OnInit {
     this.baseService.getSlydesPresentation(idPresentation).subscribe(
       (res: Slyde[]) => {
         this.slydes = res;
-        this.currentSlyde = res[0];
+        this.setQuestionDescription(this.slydes);
+        this.currentSlyde = this.currentSlyde != null ? this.currentSlyde : res[0];
         this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
       });
   }
 
-  public saveSlyde(){
-    var slyde = new Slyde(this.questionTypeSelected)
-    slyde.presentacionId = Number(this.presentationId);
-
+  public saveSlyde(slyde : Slyde){
     this.baseService.saveSlyde(slyde).subscribe();
   }
+
+  public deleteSlyde(slydeId : number){
+    this.baseService.deleteSlyde(slydeId).subscribe();
+  }
   
+  newSlyde(){
+    var slyde = new Slyde(this.questionTypeSelected);
+    slyde.presentacionId = Number(this.presentationId);
+    this.saveSlyde(slyde);
+  }
+
   changeType(){
     this.currentSlyde.tipoPregunta = Number(this.tipoPreguntaSel);
+    let updateItem = this.slydes.find(x => x.id == this.currentSlyde.id);
+    let index = this.slydes.indexOf(updateItem);
+
+    updateItem.tipoPregunta = Number(this.tipoPreguntaSel);
+    this.saveSlyde(updateItem);
   }
 
   setCurrentSlyde(slyde : Slyde){
       this.currentSlyde = slyde;
+      this.tipoPreguntaSel = slyde.tipoPregunta;
+  }
+
+  setQuestionDescription(slydes : Slyde[]){
+    this.slydes.forEach(slyde => {
+      slyde.descripcionPregunta = this.tiposPregunta.find(x => x.codigo == slyde.tipoPregunta).descripcion;
+      slyde.presentacionId = Number(this.presentationId);
+    });
   }
   
 }

@@ -138,6 +138,22 @@ import { Slyde } from "../entities/Slyde";
       );
     }
 
+    deleteSlyde(slydeId: number) : Observable <any>{
+      var subPath = 'DeleteSlyde';
+      
+      return this.http.delete<any>(this.unqMeterUrl
+        .concat(this.Controller)
+        .concat(subPath)
+        .concat("/" + slydeId)
+        )
+        .pipe(
+          tap(() => {
+              this.refreshRequired.next();
+          }),
+          catchError(err => of([]))
+      );
+    }
+
     // Respuesta Participantes
     getSlydesSinRespuestas(idPresentation: number, ip:string) : Observable<Slyde[]> {
       var subPath = 'GetSlydesSinRespuestas';
