@@ -1,3 +1,4 @@
 {
-    "unqMeterApiUrl": "https://localhost:7054/api/"
+    "unqMeterApiUrl": "https://localhost:7054/api/",
+    "unqMeterApiPort": "https://localhost:7054/"
 }

@@ -60,6 +60,9 @@ import { Slyde } from "../entities/Slyde";
         .concat(this.Controller)
         .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
         .pipe(
+          tap(() => {
+            this.refreshRequired.next();
+          }),
           catchError(err => of([]))
       );
     }
@@ -81,6 +84,9 @@ import { Slyde } from "../entities/Slyde";
         .concat(this.Controller)
         .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
         .pipe(
+          tap(() => {
+            this.refreshRequired.next();
+          }),
           catchError(err => of([]))
       );
     }
@@ -145,6 +151,22 @@ import { Slyde } from "../entities/Slyde";
         .concat(this.Controller)
         .concat(subPath)
         .concat("/" + slydeId)
+        )
+        .pipe(
+          tap(() => {
+              this.refreshRequired.next();
+          }),
+          catchError(err => of([]))
+      );
+    }
+
+    eliminarPresentacion(presentacionId: number) : Observable <any>{
+      var subPath = 'DeletePresentacion';
+      
+      return this.http.delete<any>(this.unqMeterUrl
+        .concat(this.Controller)
+        .concat(subPath)
+        .concat("/" + presentacionId)
         )
         .pipe(
           tap(() => {

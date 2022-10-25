@@ -6,4 +6,5 @@ export class Presentacion{
     public tiempoDeVida!: number;
     public tipoTiempoDeVida!: number;
     public tipoTiempoDeVidaDescripcion!: string;
+    public tieneFechaInicio: boolean;
 }

@@ -44,8 +44,11 @@
                             <td><button class="btn btn-link" [routerLink]="['/presentation-edition',presentacion.id]">{{presentacion.nombre}}</button></td>
                             <td>{{presentacion.fechaCreacion}}</td>
                             <td>
-                                <button class="btn btn-link" (click)="clonarPresentacion(presentacion);">
+                                <button class="btn btn-outline-primary" (click)="clonarPresentacion(presentacion);">
                                     <i class="bi bi-files"></i>Clonar
+                                </button> &nbsp;
+                                <button class="btn btn-outline-danger" (click)="eliminarPresentacion(presentacion.id);" *ngIf="!presentacion.tieneFechaInicio">
+                                    <i class="bi bi-trash"></i>Eliminar
                                 </button>
                             </td>
                         </tr>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Pipe, PipeTransform } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseService } from 'src/app/services/base.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'share-presentacion',
@@ -14,10 +15,12 @@ export class SharePresentacionComponent implements OnInit {
   direccionURL: string;
   estaVencida: boolean; 
 
-  constructor(private baseService: BaseService, public activeModal: NgbActiveModal) { }
+  unqMeterUrl = this.configService.config.unqMeterApiPort;
+
+  constructor(private baseService: BaseService, public activeModal: NgbActiveModal, private configService : ConfigService) { }
 
   ngOnInit(): void {
-    this.direccionURL = 'http://localhost:4200/responder-presentacion/' + this.presentacion.id;
+    this.direccionURL = this.unqMeterUrl + 'responder-presentacion/' + this.presentacion.id;
     this.sharePresentacion();
     this.estaVencidaPresentacion();
   }

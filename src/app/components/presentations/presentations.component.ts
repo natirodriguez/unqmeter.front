@@ -25,7 +25,8 @@ export class PresentationsComponent implements OnInit {
     fechaCreacion: '',
     tipoTiempoDeVida: 1,
     usuarioCreador: '', 
-    tipoTiempoDeVidaDescripcion: ''
+    tipoTiempoDeVidaDescripcion: '', 
+    tieneFechaInicio: false
   }
 
   nombreError!: string; 
@@ -49,7 +50,11 @@ export class PresentationsComponent implements OnInit {
       this.loggedIn = true;
     }
 
-    this.refreshTable();
+    this.getMisPresentaciones();
+
+    this.baseService.refreshRequired.subscribe( res =>
+      this.getMisPresentaciones()
+    );
   }
 
   open(content:any) {
@@ -68,7 +73,6 @@ export class PresentationsComponent implements OnInit {
       this.baseService.savePresentacion(this.presentacionNueva).subscribe((res : any) =>{
         if (res.status == 200) {
           this.modalReference.close();
-          this.refreshTable();
           this.toastr.success('Se realizo la operación con exito');
         }
         else {
@@ -86,12 +90,15 @@ export class PresentationsComponent implements OnInit {
     this.baseService.clonarPresentacion(presentacion).subscribe((res : any) =>{
       if (res.status == 200) {
         this.toastr.success('Se realizo la operación con exito');
-        this.refreshTable();
       }
       else {
         this.toastr.error('Error al realizar la operación');
       }
     });
+  }
+
+  eliminarPresentacion(presentacionId : number){
+    this.baseService.eliminarPresentacion(presentacionId).subscribe();
   }
   
   signOut(): void {
@@ -101,9 +108,9 @@ export class PresentationsComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  private refreshTable(){
-    this.baseService.getMisPresentaciones(this.userEmail).subscribe(
-      (res: Presentacion[]) => this.presentaciones = res);  
+  private getMisPresentaciones(){
+      this.baseService.getMisPresentaciones(this.userEmail).subscribe(
+        (res: Presentacion[]) => this.presentaciones = res)
   }
   
   private getDismissReason(reason: any): string {

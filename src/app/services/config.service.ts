@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 export interface Config {
   unqMeterApiUrl: string;
+  unqMeterApiPort: string; 
 }
 
 @Injectable()
