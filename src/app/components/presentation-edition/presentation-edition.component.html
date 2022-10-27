@@ -1,4 +1,4 @@
-<div class="container-fluid h-100">
+<div class="container-fluid h-100 overflow-hidden">
   <div class="row">
     <div class="col-md-12 col-md-pr-pl-0">
       <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
@@ -47,8 +47,8 @@
       </nav>
     </div>
   </div>
-  <div class="row h-75">
-    <div class="col-md-2">
+  <div class="row h-75 flex-nowrap">
+    <div class="col-md-2 mb-2" [ngClass]="{'overflow-y-scroll': slydes.length > 5}">
       <div class="btn-group-vertical w-100" role="group" aria-label="Vertical button group">
         <div class="card mt-2 w-100 d-inline  text-center" *ngFor="let slyde of slydes; let i=index;">
             <i class="bi fs-2" [ngClass]="{'bi-bar-chart': slyde.tipoPregunta == 1,'bi-cloud': slyde.tipoPregunta == 2,'bi-bar-chart-steps': slyde.tipoPregunta == 3,'bi-chat-left-text': slyde.tipoPregunta == 4 }"></i>
@@ -57,7 +57,7 @@
             <div class="w-100 text-center">
               {{slyde.descripcionPregunta}}
             </div>
-            <div class="text-align-end">
+            <div class="text-align-end" *ngIf="slydes.length > 1">
               <button class="btn btn-outline-danger p-0 border-0" (click)="deleteSlyde(slyde.id)"><i class="bi bi-trash-fill"></i></button>
             </div>
             </label>
@@ -65,7 +65,13 @@
       </div>
     </div>
     <div class="col-md-6 background-grey">
-
+      <div class="container-fluid bg-white h-75 mt-4">
+        <div class="row">
+          <div class="col-md-12">
+              <h4>{{question}}</h4>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <div class="row border-bottom border-secondary">
@@ -89,8 +95,21 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="contenido-tab-pane" role="tabpanel" aria-labelledby="contenido-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="personalizar-tab-pane" role="tabpanel" aria-labelledby="personalizar-tab" tabindex="0">...</div>
+            <div class="tab-pane fade show active" id="contenido-tab-pane" role="tabpanel" aria-labelledby="contenido-tab" tabindex="0">
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Tu pregunta</strong></label>
+                  <input type="text" class="form-control" placeholder="Pregunta" [(ngModel)]="question" (blur)="updateSlyde()">
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="tipoPreguntaSel == 2">
+                <div class="col-md-6">
+                  <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Entradas por participante</strong></label>
+                  <input type="number" class="form-control w-50" min="1" [(ngModel)]="entries" (blur)="updateSlyde()">
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="personalizar-tab-pane" role="tabpanel" aria-labelledby="personalizar-tab" tabindex="1">...</div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,6 +20,8 @@ import { PresentationEditionComponent } from './components/presentation-edition/
 import { SharePresentacionComponent } from './components/share-presentacion/share-presentacion.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ResponderPresentacionComponent } from './components/responder-presentacion/responder-presentacion.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -37,7 +39,8 @@ export function tokenGetter() {
     PresentationsComponent,
     PresentationEditionComponent,
     SharePresentacionComponent,
-    ResponderPresentacionComponent
+    ResponderPresentacionComponent,
+    SpinnerComponent
   ],
   entryComponents:[SharePresentacionComponent],
   imports: [
@@ -80,7 +83,9 @@ export function tokenGetter() {
         console.error(err);
       }
     } as SocialAuthServiceConfig
-  }],
+  },
+  {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

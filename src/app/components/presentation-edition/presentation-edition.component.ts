@@ -24,6 +24,8 @@ export class PresentationEditionComponent implements OnInit {
   currentSlyde : Slyde = null;
   presentationId : string;
   questionTypeSelected : number;
+  question : string = null;
+  entries : number = null;
 
   constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService, private modalService: NgbModal) { }
 
@@ -77,6 +79,8 @@ export class PresentationEditionComponent implements OnInit {
         this.slydes = res;
         this.setQuestionDescription(this.slydes);
         this.currentSlyde = this.currentSlyde != null ? this.currentSlyde : res[0];
+        this.question = this.currentSlyde.preguntaRealizada;
+        this.entries = this.currentSlyde.cantMaxRespuestaParticipantes;
         this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
       });
   }
@@ -92,7 +96,14 @@ export class PresentationEditionComponent implements OnInit {
   newSlyde(){
     var slyde = new Slyde(this.questionTypeSelected);
     slyde.presentacionId = Number(this.presentationId);
+    
     this.saveSlyde(slyde);
+  }
+
+  updateSlyde(){
+    this.currentSlyde.preguntaRealizada = this.question;
+    this.currentSlyde.cantMaxRespuestaParticipantes = this.entries;
+    this.saveSlyde(this.currentSlyde);
   }
 
   changeType(){
@@ -107,6 +118,8 @@ export class PresentationEditionComponent implements OnInit {
   setCurrentSlyde(slyde : Slyde){
       this.currentSlyde = slyde;
       this.tipoPreguntaSel = slyde.tipoPregunta;
+      this.question = slyde.preguntaRealizada;
+      this.entries = slyde.cantMaxRespuestaParticipantes;
   }
 
   setQuestionDescription(slydes : Slyde[]){
