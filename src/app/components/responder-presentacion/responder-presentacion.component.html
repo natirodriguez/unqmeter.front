@@ -28,7 +28,15 @@
             </div>
             <div *ngIf="tieneSlydeSinRespuesta">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" (click)="save();">Guardar</button>
+                    <h3>{{slydeActual.preguntaRealizada}}</h3><br>
+                    <div *ngIf="!this.puedeGuardar" class="text-danger">Debe de completar al menos una respuesta</div>
+                    <div class="col-md-6" *ngIf="slydeActual.tipoPregunta == 2">
+                        <div *ngFor="let ele of cantMaxPerParticipantes; let i = index">
+                            <input type="text" class="form-control" id="{{ele}}" value="{{ele}}" [(ngModel)]="model[i]">
+                            <br>
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="save();">Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>

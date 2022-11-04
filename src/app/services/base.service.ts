@@ -8,6 +8,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 import { TipoPregunta } from "../entities/TipoPregunta";
 import { Slyde } from "../entities/Slyde";
+import { Respuesta, DescripcionRespuesta } from "../entities/Respuesta";
 
 @Injectable({
     providedIn: 'root'
@@ -185,5 +186,20 @@ import { Slyde } from "../entities/Slyde";
           .concat(subPath)
           .concat("/" + idPresentation)
           .concat("/" + ip));
+    }
+
+    saveRespuesta(respuesta: Respuesta) : Observable <any>{
+      var subPath = 'SaveRespuesta';
+      const body= JSON.stringify(respuesta);
+
+      return this.http.post<any>(this.unqMeterUrl
+        .concat(this.ControllerRespuesta)
+        .concat(subPath), body, {headers: {'accept':'*/*','Content-Type':'application/json; charset=UTF-8;'}, observe: 'response'})
+        .pipe(
+          tap(() => {
+              this.refreshRequired.next();
+          }),
+          catchError(err => of([]))
+      );
     }
 }
