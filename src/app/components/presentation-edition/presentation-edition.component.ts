@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { BaseService } from 'src/app/services/base.service';
 import { SharePresentacionComponent } from '../share-presentacion/share-presentacion.component';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OpcionesSlyde } from 'src/app/entities/OpcionesSlyde';
 
 @Component({
   selector: 'presentation-edition',
@@ -26,6 +27,7 @@ export class PresentationEditionComponent implements OnInit {
   questionTypeSelected : number;
   question : string = null;
   entries : number = null;
+  itemsOpciones : OpcionesSlyde[] = [];
 
   constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService, private modalService: NgbModal) { }
 
@@ -78,9 +80,11 @@ export class PresentationEditionComponent implements OnInit {
       (res: Slyde[]) => {
         this.slydes = res;
         this.setQuestionDescription(this.slydes);
-        this.currentSlyde = this.currentSlyde != null ? this.currentSlyde : res[0];
+        var slyde = this.currentSlyde != null ? this.slydes.find(x => x.id == this.currentSlyde.id) : res[0];
+        this.currentSlyde = slyde;
         this.question = this.currentSlyde.preguntaRealizada;
         this.entries = this.currentSlyde.cantMaxRespuestaParticipantes;
+        this.itemsOpciones = this.currentSlyde.opcionesSlydes;
         this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
       });
   }
@@ -92,6 +96,10 @@ export class PresentationEditionComponent implements OnInit {
   public deleteSlyde(slydeId : number){
     this.baseService.deleteSlyde(slydeId).subscribe();
   }
+
+  public deleteOptionSlyde(optionslydeId : number){
+    this.baseService.deleteOptionSlyde(optionslydeId).subscribe();
+  }
   
   newSlyde(){
     var slyde = new Slyde(this.questionTypeSelected);
@@ -102,7 +110,12 @@ export class PresentationEditionComponent implements OnInit {
 
   updateSlyde(){
     this.currentSlyde.preguntaRealizada = this.question;
-    this.currentSlyde.cantMaxRespuestaParticipantes = this.entries;
+    if(this.tipoPreguntaSel == 2){
+      this.currentSlyde.cantMaxRespuestaParticipantes = this.entries;
+    }
+    if(this.tipoPreguntaSel == 3){
+      this.currentSlyde.opcionesSlydes = this.itemsOpciones;
+    }
     this.saveSlyde(this.currentSlyde);
   }
 
@@ -120,6 +133,7 @@ export class PresentationEditionComponent implements OnInit {
       this.tipoPreguntaSel = slyde.tipoPregunta;
       this.question = slyde.preguntaRealizada;
       this.entries = slyde.cantMaxRespuestaParticipantes;
+      this.itemsOpciones = this.currentSlyde.opcionesSlydes;
   }
 
   setQuestionDescription(slydes : Slyde[]){
@@ -127,6 +141,16 @@ export class PresentationEditionComponent implements OnInit {
       slyde.descripcionPregunta = this.tiposPregunta.find(x => x.codigo == slyde.tipoPregunta).descripcion;
       slyde.presentacionId = Number(this.presentationId);
     });
+  }
+
+  addItem(){
+    var newOption = new OpcionesSlyde();
+    newOption.id = 0;
+    newOption.opcion = "";
+    
+    this.itemsOpciones.push(newOption);
+
+    this.updateSlyde();
   }
   
 }

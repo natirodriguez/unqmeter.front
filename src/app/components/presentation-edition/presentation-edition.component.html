@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" [ngClass]="{'overflow-y-scroll': itemsOpciones.length > 3}">
       <div class="row border-bottom border-secondary">
         <div class="col-md-12">
           <label class="form-label pt-2">Tipo de slyde</label>
@@ -95,17 +95,35 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="contenido-tab-pane" role="tabpanel" aria-labelledby="contenido-tab" tabindex="0">
+            <div class="tab-pane fade show active" id="contenido-tab-pane" role="tabpanel" aria-labelledby="contenido-tab" tabindex="0" >
               <div class="row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-12" >
                   <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Tu pregunta</strong></label>
                   <input type="text" class="form-control" placeholder="Pregunta" [(ngModel)]="question" (blur)="updateSlyde()">
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="tipoPreguntaSel == 1">
+                <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Opciones</strong></label>
+                <div class="col-md-12">
+                  <div class="d-flex" *ngFor="let item of itemsOpciones">
+                    <input type="text" class="form-control mb-2" (blur)="updateSlyde()" [(ngModel)]="item.opcion"><a role="button" (click)="deleteOptionSlyde(item.id)"><i class="bi bi-x fs-4"></i></a>
+                  </div>
+                  <button type="button" class="btn btn-secondary w-100 mt-1 mb-3" (click)="addItem()"><i class="bi bi-plus-lg"></i> Agregar opcion</button>
                 </div>
               </div>
               <div class="row mt-3" *ngIf="tipoPreguntaSel == 2">
                 <div class="col-md-6">
                   <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Entradas por participante</strong></label>
                   <input type="number" class="form-control w-50" min="1" [(ngModel)]="entries" (blur)="updateSlyde()">
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="tipoPreguntaSel == 3">
+                <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Items</strong></label>
+                <div class="col-md-12">
+                  <div class="d-flex" *ngFor="let item of itemsOpciones">
+                    <input type="text" class="form-control mb-2" (blur)="updateSlyde()" [(ngModel)]="item.opcion"><a role="button" (click)="deleteOptionSlyde(item.id)"><i class="bi bi-x fs-4"></i></a>
+                  </div>
+                  <button type="button" class="btn btn-secondary w-100 mt-1 mb-3" (click)="addItem()"><i class="bi bi-plus-lg"></i> Agregar item</button>
                 </div>
               </div>
             </div>

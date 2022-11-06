@@ -186,4 +186,20 @@ import { Slyde } from "../entities/Slyde";
           .concat("/" + idPresentation)
           .concat("/" + ip));
     }
+
+    deleteOptionSlyde(optionSlydeId: number) : Observable <any>{
+      var subPath = 'DeleteOptionSlyde';
+      
+      return this.http.delete<any>(this.unqMeterUrl
+        .concat(this.Controller)
+        .concat(subPath)
+        .concat("/" + optionSlydeId)
+        )
+        .pipe(
+          tap(() => {
+              this.refreshRequired.next();
+          }),
+          catchError(err => of([]))
+      );
+    }
 }
