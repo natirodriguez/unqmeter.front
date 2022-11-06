@@ -42,6 +42,13 @@ Método utilizado para guardar una slyde.
 * <b>DELETE:</b> /api/Presentation/DeleteSlyde/{slydeId} <br>
 Método utilizado para eliminar la slyde correspondiente al id pasado por parametro.
 
+* <b>DELETE:</b> /api/Presentation/DeletePresentacion/{presentacionId} <br>
+Método utilizado para eliminar la presentación correspondiente al id pasado por parametro.
+
+* <b>DELETE:</b> /api/Presentation/DeleteOptionSlyde/{optionSlydeId} <br>
+Método utilizado para eliminar la opcion de slyde correspondiente al id pasado por parametro.
+
+<br/>
 
 <h4>Instalación del ambiente de desarrollo:</h4>
 
