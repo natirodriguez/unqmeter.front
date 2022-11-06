@@ -3,6 +3,7 @@ import { HttpClient  } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BaseService } from 'src/app/services/base.service';
 import { Slyde } from 'src/app/entities/Slyde';
+import { Respuesta,DescripcionRespuesta } from 'src/app/entities/Respuesta';
 
 @Component({
   selector: 'responder-presentacion',
@@ -16,15 +17,33 @@ export class ResponderPresentacionComponent implements OnInit {
   estaVencida: boolean; 
   tieneSlydeSinRespuesta: boolean;
   slydes: Slyde[] = [];
+  puedeGuardar: boolean; 
+
+  slydeActual: Slyde;
+  cantMaxPerParticipantes: Array<number>;
+
+  model: any = [];
+
+  respuestaActual: Respuesta = {
+    id: 0,
+    slydeId: 0, 
+    participante: '',
+    descripcionesRespuesta: []
+  }
 
   constructor(private http:HttpClient, private route: ActivatedRoute, private baseService: BaseService) { }
 
   ngOnInit(): void {
+    this.puedeGuardar = false; 
     this.id =this.route.snapshot.paramMap.get('id');
     this.presentacionId = Number(this.id);
     
     this.getIPAddress();
     this.estaVencidaPresentacion();
+
+    this.baseService.refreshRequired.subscribe( res =>
+      this.getIPAddress()
+    );
   }
 
   getIPAddress()
@@ -39,6 +58,8 @@ export class ResponderPresentacionComponent implements OnInit {
     this.baseService.getSlydesSinRespuestas(this.presentacionId, ip).subscribe((res:any)=>{
       this.slydes = res; 
       this.tieneSlydeSinRespuesta = this.slydes.length > 0;
+      this.slydeActual = res[0];
+      this.cantMaxPerParticipantes = [].constructor(this.slydeActual.cantMaxRespuestaParticipantes);
     });
   }
 
@@ -48,7 +69,28 @@ export class ResponderPresentacionComponent implements OnInit {
     });
   }
 
-  save(){
+  descripcionRespuestaWordCloud(){
+    if(this.slydeActual.tipoPregunta == 2){
+        this.puedeGuardar = this.model.length > 0; 
+        for(let o of this.model){
+          let opcionSlyde = new DescripcionRespuesta(); 
+          opcionSlyde.descripcion = o;
     
+          this.respuestaActual.descripcionesRespuesta.push(opcionSlyde);
+        };
+    }
+  }
+
+  save(){
+    this.respuestaActual.slydeId = this.slydeActual.id;
+    this.respuestaActual.participante = this.ipAddress;
+
+    this.descripcionRespuestaWordCloud(); 
+
+    if(this.puedeGuardar){
+      this.baseService.saveRespuesta(this.respuestaActual).subscribe((res : any) =>{
+        this.model = [];
+      });
+    }
   }
 }
