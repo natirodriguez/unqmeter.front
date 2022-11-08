@@ -3,6 +3,7 @@ export class Respuesta{
     public slydeId: number;
     public participante: string;
     public descripcionesRespuesta: Array<DescripcionRespuesta>;
+    public descripcionGeneral: string;
 }
 
 export class DescripcionRespuesta{

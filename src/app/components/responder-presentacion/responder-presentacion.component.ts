@@ -23,12 +23,14 @@ export class ResponderPresentacionComponent implements OnInit {
   cantMaxPerParticipantes: Array<number>;
 
   model: any = [];
+  openEnded: string = "";
 
   respuestaActual: Respuesta = {
     id: 0,
     slydeId: 0, 
     participante: '',
-    descripcionesRespuesta: []
+    descripcionesRespuesta: [], 
+    descripcionGeneral: null
   }
 
   constructor(private http:HttpClient, private route: ActivatedRoute, private baseService: BaseService) { }
@@ -59,7 +61,7 @@ export class ResponderPresentacionComponent implements OnInit {
       this.slydes = res; 
       this.tieneSlydeSinRespuesta = this.slydes.length > 0;
       this.slydeActual = res[0];
-      this.cantMaxPerParticipantes = [].constructor(this.slydeActual.cantMaxRespuestaParticipantes);
+      this.cantMaxPerParticipantes = new Array(this.slydeActual.cantMaxRespuestaParticipantes);
     });
   }
 
@@ -81,11 +83,19 @@ export class ResponderPresentacionComponent implements OnInit {
     }
   }
 
+  descripcionRespuestaTextoAbierto(){
+    if (this.slydeActual.tipoPregunta == 4){
+      this.puedeGuardar = this.openEnded.length > 0;
+      this.respuestaActual.descripcionGeneral = this.openEnded;
+    }
+  }
+
   save(){
     this.respuestaActual.slydeId = this.slydeActual.id;
     this.respuestaActual.participante = this.ipAddress;
 
     this.descripcionRespuestaWordCloud(); 
+    this.descripcionRespuestaTextoAbierto();
 
     if(this.puedeGuardar){
       this.baseService.saveRespuesta(this.respuestaActual).subscribe((res : any) =>{
