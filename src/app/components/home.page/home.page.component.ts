@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Presentacion } from '../../entities/Presentacion';
-import { BaseService } from '../../services/base.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { Route, Router, RouterFeature } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',

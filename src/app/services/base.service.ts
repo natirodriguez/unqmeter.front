@@ -31,7 +31,7 @@ import { Respuesta, DescripcionRespuesta } from "../entities/Respuesta";
     }
     private _refreshRequired = new Subject<void>();
 
-    constructor(public http: HttpClient,private configService : ConfigService,private router: Router) {
+    constructor(public http: HttpClient,private configService : ConfigService) {
     }
     
     unqMeterUrl = this.configService.config.unqMeterApiUrl;

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Pipe, PipeTransform } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Presentacion } from 'src/app/entities/Presentacion';
 import { BaseService } from 'src/app/services/base.service';
 import { ConfigService } from 'src/app/services/config.service';
 
@@ -9,7 +10,7 @@ import { ConfigService } from 'src/app/services/config.service';
   styleUrls: ['./share-presentacion.component.scss']
 })
 export class SharePresentacionComponent implements OnInit {
-  @Input() public presentacion;
+  @Input() public presentacion = new Presentacion();
   fechaFin: string;
   vencido: boolean;
   direccionURL: string;

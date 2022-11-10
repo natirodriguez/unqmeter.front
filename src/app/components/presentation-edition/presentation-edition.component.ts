@@ -17,7 +17,7 @@ import { OpcionesSlyde } from 'src/app/entities/OpcionesSlyde';
 export class PresentationEditionComponent implements OnInit {
   userName: string;
   presentacion: Presentacion;
-  slydes : Slyde[];
+  slydes : Slyde[] = [];
   tiposPregunta : TipoPregunta[];
   tipoPreguntaSel : number;
   modalReference: any;
@@ -29,7 +29,7 @@ export class PresentationEditionComponent implements OnInit {
   entries : number = null;
   itemsOpciones : OpcionesSlyde[] = [];
 
-  constructor(private route: ActivatedRoute,private authService: AuthenticationService,private baseService: BaseService, private modalService: NgbModal) { }
+  constructor(private route: ActivatedRoute, private baseService: BaseService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this. presentationId = this.route.snapshot.paramMap.get('id');

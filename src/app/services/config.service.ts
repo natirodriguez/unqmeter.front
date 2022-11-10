@@ -8,7 +8,7 @@ export interface Config {
 
 @Injectable()
 export class ConfigService {
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
     public config: any;
 

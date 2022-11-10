@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   user!: SocialUser;
   @Output() newItemEvent = new EventEmitter<SocialUser>();
 
-  constructor(private socialAuthService: SocialAuthService, private router: Router, private route: ActivatedRoute,private authService: AuthenticationService,private http: HttpClient) { 
+  constructor(private socialAuthService: SocialAuthService, private router: Router,private authService: AuthenticationService,private http: HttpClient) { 
     
   }
 
