@@ -26,7 +26,7 @@
                     <h3>No hay diapositivas que contestar.</h3>
                 </div>
             </div>
-            <div *ngIf="tieneSlydeSinRespuesta">
+            <div id="divSlydes" *ngIf="tieneSlydeSinRespuesta">
                 <div class="col-md-12">
                     <h3>{{slydeActual.preguntaRealizada}}</h3><br>
                     <div *ngIf="!this.puedeGuardar" class="text-danger">Debe de completar el o los campos solicitados</div>
