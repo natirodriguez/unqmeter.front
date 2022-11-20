@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BaseService } from 'src/app/services/base.service';
 import { Slyde } from 'src/app/entities/Slyde';
 import { Respuesta,DescripcionRespuesta } from 'src/app/entities/Respuesta';
+import { OpcionesSlyde } from 'src/app/entities/OpcionesSlyde';
 
 @Component({
   selector: 'responder-presentacion',
@@ -18,19 +19,24 @@ export class ResponderPresentacionComponent implements OnInit {
   tieneSlydeSinRespuesta: boolean;
   slydes: Slyde[] = [];
   puedeGuardar: boolean; 
+  opcionesSlyde: OpcionesSlyde[] = []
 
   slydeActual: Slyde;
   cantMaxPerParticipantes: Array<number>;
 
   model: any = [];
   openEnded: string = "";
+  opcionSeleccionada: number = 0;
+  ordenSeleccion: Array<number>; 
+  cantidadOpciones:number = 0; 
 
   respuestaActual: Respuesta = {
     id: 0,
     slydeId: 0, 
     participante: '',
     descripcionesRespuesta: [], 
-    descripcionGeneral: null
+    descripcionGeneral: null, 
+    opcionElegidaId: null
   }
 
   constructor(private http:HttpClient, private route: ActivatedRoute, private baseService: BaseService) { }
@@ -62,6 +68,8 @@ export class ResponderPresentacionComponent implements OnInit {
       this.tieneSlydeSinRespuesta = this.slydes.length > 0;
       this.slydeActual = res[0];
       this.cantMaxPerParticipantes = new Array(this.slydeActual.cantMaxRespuestaParticipantes);
+      this.opcionesSlyde = this.slydeActual.opcionesSlydes;
+      this.cantidadOpciones = this.opcionesSlyde.length;
     });
   }
 
@@ -90,12 +98,30 @@ export class ResponderPresentacionComponent implements OnInit {
     }
   }
 
+  validacionesRanking(){
+    if (this.slydeActual.tipoPregunta == 3){
+      if (this.ordenSeleccion.length == 0)
+      {
+        this.puedeGuardar = false;
+      }
+    }
+  }
+
+  validacionMultipleChoise(){
+    if (this.slydeActual.tipoPregunta == 1){
+      this.puedeGuardar = this.opcionSeleccionada != 0;
+      this.respuestaActual.opcionElegidaId = this.opcionSeleccionada;
+    }
+  }
+
   save(){
     this.respuestaActual.slydeId = this.slydeActual.id;
     this.respuestaActual.participante = this.ipAddress;
 
     this.descripcionRespuestaWordCloud(); 
     this.descripcionRespuestaTextoAbierto();
+    this.validacionesRanking();
+    this.validacionMultipleChoise(); 
 
     if(this.puedeGuardar){
       this.baseService.saveRespuesta(this.respuestaActual).subscribe((res : any) =>{

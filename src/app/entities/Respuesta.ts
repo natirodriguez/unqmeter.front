@@ -4,6 +4,7 @@ export class Respuesta{
     public participante: string;
     public descripcionesRespuesta: Array<DescripcionRespuesta>;
     public descripcionGeneral: string;
+    public opcionElegidaId: number;
 }
 
 export class DescripcionRespuesta{
