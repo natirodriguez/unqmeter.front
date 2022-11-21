@@ -48,6 +48,12 @@
                         <div *ngFor="let nroPuesto of [].constructor(cantidadOpciones); let i = index">
                             Puesto: {{i+1}}
                             <br>
+                            <select class="form-control" name="{{i}}" [(ngModel)]="model[i]">
+                                <option *ngFor="let op of opcionesSlyde" [value]="op.id">
+                                {{op.opcion}}
+                                </option> 
+                            </select>
+                            <br>
                         </div>
                         <br>
                     </div>

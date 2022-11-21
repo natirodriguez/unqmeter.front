@@ -27,7 +27,6 @@ export class ResponderPresentacionComponent implements OnInit {
   model: any = [];
   openEnded: string = "";
   opcionSeleccionada: number = 0;
-  ordenSeleccion: Array<number>; 
   cantidadOpciones:number = 0; 
 
   respuestaActual: Respuesta = {
@@ -99,11 +98,20 @@ export class ResponderPresentacionComponent implements OnInit {
   }
 
   validacionesRanking(){
+    var valorOpciones = this.opcionesSlyde.map(({ id }) => id.toString());
+    var valorDevuelto = valorOpciones.some(e => !this.model.includes(e));
+
     if (this.slydeActual.tipoPregunta == 3){
-      if (this.ordenSeleccion.length == 0)
-      {
-        this.puedeGuardar = false;
-      }
+        this.puedeGuardar = !valorDevuelto;
+
+        if(this.puedeGuardar){
+          for(let o of this.model){
+            let opcionSlyde = new DescripcionRespuesta(); 
+            opcionSlyde.descripcion = this.opcionesSlyde.filter(x => x.id.toString() == o)[0].opcion;
+      
+            this.respuestaActual.descripcionesRespuesta.push(opcionSlyde);
+          };
+        }
     }
   }
 
