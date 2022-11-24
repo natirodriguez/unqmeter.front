@@ -80,8 +80,8 @@ export class PresentationEditionComponent implements OnInit {
       (res: Slyde[]) => {
         this.slydes = res;
         this.setQuestionDescription(this.slydes);
-        var slyde = this.currentSlyde != null ? this.slydes.find(x => x.id == this.currentSlyde.id) : res[0];
-        this.currentSlyde = slyde;
+        var slydeSelect = this.currentSlyde != null ? this.slydes.find(x => x.id == this.currentSlyde.id) : res[0];
+        this.currentSlyde = slydeSelect;
         this.question = this.currentSlyde.preguntaRealizada;
         this.entries = this.currentSlyde.cantMaxRespuestaParticipantes;
         this.itemsOpciones = this.currentSlyde.opcionesSlydes;
@@ -94,7 +94,13 @@ export class PresentationEditionComponent implements OnInit {
   }
 
   public deleteSlyde(slydeId : number){
-    this.baseService.deleteSlyde(slydeId).subscribe();
+
+    this.baseService.deleteSlyde(slydeId).subscribe((res : any) => {
+      if (res == null) {
+        this.slydes = [];
+        this.currentSlyde = null;
+      }
+    });
   }
 
   public deleteOptionSlyde(optionslydeId : number){
