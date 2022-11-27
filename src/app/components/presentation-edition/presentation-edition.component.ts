@@ -27,6 +27,7 @@ export class PresentationEditionComponent implements OnInit {
   questionTypeSelected : number;
   question : string = null;
   entries : number = null;
+  habilitado : boolean;
   itemsOpciones : OpcionesSlyde[] = [];
 
   constructor(private route: ActivatedRoute, private baseService: BaseService, private modalService: NgbModal) { }
@@ -86,6 +87,7 @@ export class PresentationEditionComponent implements OnInit {
         this.entries = this.currentSlyde.cantMaxRespuestaParticipantes;
         this.itemsOpciones = this.currentSlyde.opcionesSlydes;
         this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
+        this.habilitado = this.currentSlyde.habilitadoParaResponder;
       });
   }
 
@@ -122,6 +124,7 @@ export class PresentationEditionComponent implements OnInit {
     if(this.tipoPreguntaSel == 3){
       this.currentSlyde.opcionesSlydes = this.itemsOpciones;
     }
+    this.currentSlyde.habilitadoParaResponder = this.habilitado;
     this.saveSlyde(this.currentSlyde);
   }
 
@@ -140,6 +143,7 @@ export class PresentationEditionComponent implements OnInit {
       this.question = slyde.preguntaRealizada;
       this.entries = slyde.cantMaxRespuestaParticipantes;
       this.itemsOpciones = this.currentSlyde.opcionesSlydes;
+      this.habilitado = this.currentSlyde.habilitadoParaResponder;
   }
 
   setQuestionDescription(slydes : Slyde[]){

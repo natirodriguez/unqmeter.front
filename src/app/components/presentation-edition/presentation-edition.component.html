@@ -90,9 +90,6 @@
             <li class="nav-item width-200" role="presentation">
               <button class="nav-link active w-100" id="contenido-tab" data-bs-toggle="tab" data-bs-target="#contenido-tab-pane" type="button" role="tab" aria-controls="contenido-tab-pane" aria-selected="true">Contenido</button>
             </li>
-            <li class="nav-item width-200" role="presentation">
-              <button class="nav-link w-100" id="personalizar-tab" data-bs-toggle="tab" data-bs-target="#personalizar-tab-pane" type="button" role="tab" aria-controls="personalizar-tab-pane" aria-selected="false">Personalizar</button>
-            </li>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="contenido-tab-pane" role="tabpanel" aria-labelledby="contenido-tab" tabindex="0" >
@@ -126,8 +123,16 @@
                   <button type="button" class="btn btn-secondary w-100 mt-1 mb-3" (click)="addItem()"><i class="bi bi-plus-lg"></i> Agregar item</button>
                 </div>
               </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" [checked]="habilitado" [(ngModel)]="habilitado" (blur)="updateSlyde()" >
+                    <label class="form-label fs-6" for="flexCheckChecked">Habilitado para responder
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tab-pane fade" id="personalizar-tab-pane" role="tabpanel" aria-labelledby="personalizar-tab" tabindex="1">...</div>
           </div>
         </div>
       </div>

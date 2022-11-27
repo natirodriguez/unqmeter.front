@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <label for="tiempoDeVida">La presentación tiene un tiempo de vida de {{presentacion.tiempoDeVida}} {{presentacion.tipoTiempoDeVidaDescripcion}}.</label>
                 <br>
-                <label for="diaExpiracion">La fecha de expiración es el {{fechaFin | date: 'dd/MM/yyyy h:mm a z'}}.</label>
+                <label for="diaExpiracion">La fecha de expiración es el {{fechaFin | date: 'dd/MM/yyyy h:mm a'}}.</label>
                 <br><br>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" [(ngModel)]="direccionURL" [disabled]="true" name="url" id="url">

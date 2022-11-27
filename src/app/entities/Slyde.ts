@@ -8,6 +8,7 @@ export class Slyde{
     public preguntaRealizada : string;
     public cantMaxRespuestaParticipantes : number;
     public opcionesSlydes : OpcionesSlyde[];
+    public habilitadoParaResponder: boolean;
 
     public constructor(tipoPregunta : number){
         this.tipoPregunta = tipoPregunta;
