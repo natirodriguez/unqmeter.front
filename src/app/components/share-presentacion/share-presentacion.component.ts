@@ -12,7 +12,6 @@ import { ConfigService } from 'src/app/services/config.service';
 export class SharePresentacionComponent implements OnInit {
   @Input() public presentacion = new Presentacion();
   fechaFin: string;
-  vencido: boolean;
   direccionURL: string;
   estaVencida: boolean; 
 

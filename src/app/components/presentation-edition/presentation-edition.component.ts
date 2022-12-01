@@ -29,18 +29,20 @@ export class PresentationEditionComponent implements OnInit {
   entries : number = null;
   habilitado : boolean;
   itemsOpciones : OpcionesSlyde[] = [];
+  estaVencida: boolean; 
 
   constructor(private route: ActivatedRoute, private baseService: BaseService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this. presentationId = this.route.snapshot.paramMap.get('id');
     this.getPresentacion(Number(this.presentationId));
+    this.estaVencidaPresentacion(Number(this.presentationId));
     this.getTipoPreguntas();
     this.getSlydesPresentation(Number(this.presentationId));
     this.userName = localStorage.getItem("userName");
     this.baseService.refreshRequired.subscribe( res =>
       this.getSlydesPresentation(Number(this.presentationId))
-    );
+      );
   }
 
   public getPresentacion(id: number){
@@ -163,4 +165,10 @@ export class PresentationEditionComponent implements OnInit {
     this.updateSlyde();
   }
   
+  estaVencidaPresentacion(idPresentation: number){
+    this.baseService.getEstaVencidaLaPresentacion(idPresentation).subscribe((res : any) =>{
+        this.estaVencida = res; 
+        console.log(this.estaVencida);
+    });
+  }
 }

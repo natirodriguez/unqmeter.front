@@ -16,7 +16,7 @@
       </nav>
       <nav class="navbar navbar-expand-lg bg-light navbar-height border-bottom border-secondary ps-3">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#slydeModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#slydeModal" [disabled]="estaVencida">
           Nueva Diapositiva
         </button>
 
@@ -58,7 +58,7 @@
               {{slyde.descripcionPregunta}}
             </div>
             <div class="text-align-end" *ngIf="slydes.length > 1">
-              <button class="btn btn-outline-danger p-0 border-0" (click)="deleteSlyde(slyde.id)"><i class="bi bi-trash-fill"></i></button>
+              <button class="btn btn-outline-danger p-0 border-0" (click)="deleteSlyde(slyde.id)" [disabled]="estaVencida"><i class="bi bi-trash-fill"></i></button>
             </div>
             </label>
         </div>
@@ -77,7 +77,7 @@
       <div class="row border-bottom border-secondary">
         <div class="col-md-12">
           <label class="form-label pt-2">Tipo de slyde</label>
-          <select class="form-select mb-4" [(ngModel)]="tipoPreguntaSel" (change)="changeType()">
+          <select class="form-select mb-4" [(ngModel)]="tipoPreguntaSel" (change)="changeType()" [disabled]="estaVencida">
             <option *ngFor="let tipo of tiposPregunta" [value]="tipo.codigo">
               {{tipo.descripcion}}
             </option>
@@ -96,14 +96,14 @@
               <div class="row mt-3">
                 <div class="col-md-12" >
                   <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Tu pregunta</strong></label>
-                  <input type="text" class="form-control" placeholder="Pregunta" [(ngModel)]="question" (blur)="updateSlyde()">
+                  <input type="text" class="form-control" placeholder="Pregunta" [(ngModel)]="question" (blur)="updateSlyde()" [disabled]="estaVencida">
                 </div>
               </div>
               <div class="row mt-3" *ngIf="tipoPreguntaSel == 1">
                 <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Opciones</strong></label>
                 <div class="col-md-12">
                   <div class="d-flex" *ngFor="let item of itemsOpciones">
-                    <input type="text" class="form-control mb-2" (blur)="updateSlyde()" [(ngModel)]="item.opcion"><a role="button" (click)="deleteOptionSlyde(item.id)"><i class="bi bi-x fs-4"></i></a>
+                    <input type="text" class="form-control mb-2" (blur)="updateSlyde()" [(ngModel)]="item.opcion" [disabled]="estaVencida"><a role="button" (click)="deleteOptionSlyde(item.id)"><i class="bi bi-x fs-4"></i></a>
                   </div>
                   <button type="button" class="btn btn-secondary w-100 mt-1 mb-3" (click)="addItem()"><i class="bi bi-plus-lg"></i> Agregar opcion</button>
                 </div>
@@ -111,22 +111,22 @@
               <div class="row mt-3" *ngIf="tipoPreguntaSel == 2">
                 <div class="col-md-6">
                   <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Entradas por participante</strong></label>
-                  <input type="number" class="form-control w-50" min="1" [(ngModel)]="entries" (blur)="updateSlyde()">
+                  <input type="number" class="form-control w-50" min="1" [(ngModel)]="entries" (blur)="updateSlyde()" [disabled]="estaVencida">
                 </div>
               </div>
               <div class="row mt-3" *ngIf="tipoPreguntaSel == 3">
                 <label for="exampleFormControlInput1" class="form-label fs-6"><strong>Items</strong></label>
                 <div class="col-md-12">
                   <div class="d-flex" *ngFor="let item of itemsOpciones">
-                    <input type="text" class="form-control mb-2" (blur)="updateSlyde()" [(ngModel)]="item.opcion"><a role="button" (click)="deleteOptionSlyde(item.id)"><i class="bi bi-x fs-4"></i></a>
+                    <input type="text" class="form-control mb-2" (blur)="updateSlyde()" [(ngModel)]="item.opcion" [disabled]="estaVencida"><a role="button" (click)="deleteOptionSlyde(item.id)"><i class="bi bi-x fs-4"></i></a>
                   </div>
-                  <button type="button" class="btn btn-secondary w-100 mt-1 mb-3" (click)="addItem()"><i class="bi bi-plus-lg"></i> Agregar item</button>
+                  <button type="button" class="btn btn-secondary w-100 mt-1 mb-3" (click)="addItem()" [disabled]="estaVencida"><i class="bi bi-plus-lg"></i> Agregar item</button>
                 </div>
               </div>
               <div class="row mt-3">
                 <div class="col-md-12">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" [checked]="habilitado" [(ngModel)]="habilitado" (blur)="updateSlyde()" >
+                    <input class="form-check-input" type="checkbox" value="" [checked]="habilitado" [(ngModel)]="habilitado" (blur)="updateSlyde()" [disabled]="estaVencida">
                     <label class="form-label fs-6" for="flexCheckChecked">Habilitado para responder
                     </label>
                   </div>

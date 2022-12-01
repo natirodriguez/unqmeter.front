@@ -17,13 +17,13 @@
     <div class="container mt-5">
         <div class="row" *ngIf="estaVencida">
             <div class="col-md-12">
-                <h3>Ya no es posible responder la presentación.</h3>
+                <h3>La presentación se encuentra vencida, por lo que ya no es posible responderla.</h3>
             </div>
         </div>
         <div class="row" *ngIf="!estaVencida">
             <div *ngIf="!tieneSlydeSinRespuesta">
                 <div class="col-md-12">
-                    <h3>No hay diapositivas que contestar.</h3>
+                    <h3>La presentación no contiene diapositivas pendientes para responder.</h3>
                 </div>
             </div>
             <div id="divSlydes" *ngIf="tieneSlydeSinRespuesta">
@@ -31,7 +31,7 @@
                     <h3>{{slydeActual.preguntaRealizada}}</h3><br>
                     <div *ngIf="!this.puedeGuardar" class="text-danger">Debe de completar el o los campos solicitados</div>
                     <div class="col-md-6" *ngIf="slydeActual.tipoPregunta == 1">
-                        <select class="form-control" name="opcionSeleccionada" [(ngModel)]="opcionSeleccionada">
+                        <select class="form-select" name="opcionSeleccionada" [(ngModel)]="opcionSeleccionada">
                                 <option *ngFor="let op of opcionesSlyde" [value]="op.id">
                                 {{op.opcion}}
                                 </option> 
@@ -48,7 +48,7 @@
                         <div *ngFor="let nroPuesto of [].constructor(cantidadOpciones); let i = index">
                             Puesto: {{i+1}}
                             <br>
-                            <select class="form-control" name="{{i}}" [(ngModel)]="model[i]">
+                            <select class="form-select" name="{{i}}" [(ngModel)]="model[i]">
                                 <option *ngFor="let op of opcionesSlyde" [value]="op.id">
                                 {{op.opcion}}
                                 </option> 
