@@ -22,6 +22,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ResponderPresentacionComponent } from './components/responder-presentacion/responder-presentacion.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { TagCloudComponent } from 'angular-tag-cloud-module';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -53,6 +54,7 @@ export function tokenGetter() {
     ClipboardModule,
     ToastrModule.forRoot(),
     FormsModule,
+    TagCloudComponent,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -1,4 +1,6 @@
+import { Answer } from "./Answer";
 import { OpcionesSlyde } from "./OpcionesSlyde";
+import { Respuesta } from "./Respuesta";
 
 export class Slyde{
     public id: number;
@@ -8,7 +10,9 @@ export class Slyde{
     public preguntaRealizada : string;
     public cantMaxRespuestaParticipantes : number;
     public opcionesSlydes : OpcionesSlyde[];
+    public respuestas : Respuesta[];
     public habilitadoParaResponder: boolean;
+    public answers: Answer[];
 
     public constructor(tipoPregunta : number){
         this.tipoPregunta = tipoPregunta;

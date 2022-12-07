@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.11.6",
+    "angular-tag-cloud-module": "^14.0.0",
     "bootstrap": "^5.2.0",
     "jquery": "^3.6.1",
     "ngx-toastr": "^15.0.0",

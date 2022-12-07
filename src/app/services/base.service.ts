@@ -113,7 +113,7 @@ import { Respuesta, DescripcionRespuesta } from "../entities/Respuesta";
     }
 
     getSlydesPresentation(idPresentation : number) : Observable <Slyde[]>{
-      var subPath = 'GetSlydesByIdPresentation';
+      var subPath = 'GetSlydesAnswersByIdPresentation';
 
       return this.http.get<Slyde[]>(this.unqMeterUrl
           .concat(this.Controller)

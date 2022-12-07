@@ -8,6 +8,7 @@ import { BaseService } from 'src/app/services/base.service';
 import { SharePresentacionComponent } from '../share-presentacion/share-presentacion.component';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OpcionesSlyde } from 'src/app/entities/OpcionesSlyde';
+import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
 @Component({
   selector: 'presentation-edition',
@@ -30,7 +31,14 @@ export class PresentationEditionComponent implements OnInit {
   habilitado : boolean;
   itemsOpciones : OpcionesSlyde[] = [];
   estaVencida: boolean; 
+  options: CloudOptions = {
+    width: 700,
+    height: 600,
+    overflow: false,
+  };
 
+  data: CloudData[] = [];
+  
   constructor(private route: ActivatedRoute, private baseService: BaseService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -90,6 +98,7 @@ export class PresentationEditionComponent implements OnInit {
         this.itemsOpciones = this.currentSlyde.opcionesSlydes;
         this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
         this.habilitado = this.currentSlyde.habilitadoParaResponder;
+        this.data = this.currentSlyde.answers as unknown as CloudData[];
       });
   }
 
