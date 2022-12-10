@@ -50,7 +50,9 @@ describe('PresentationEditionComponent', () => {
         "tipoPregunta": 1,
         "fechaCreacion": "2022-10-22T19:59:49.353",
         "cantMaxRespuestaParticipantes": null,
-        "opcionesSlydes": []
+        "opcionesSlydes": [],
+        "habilitadoParaResponder": true,
+        "answers": []
       },
       {
         "id": 2,
@@ -59,7 +61,9 @@ describe('PresentationEditionComponent', () => {
         "tipoPregunta": 2,
         "fechaCreacion": "2022-11-12T21:13:49.353",
         "cantMaxRespuestaParticipantes": null,
-        "opcionesSlydes": []
+        "opcionesSlydes": [],
+        "habilitadoParaResponder": true,
+        "answers": []
       }
     ];
 
@@ -67,7 +71,7 @@ describe('PresentationEditionComponent', () => {
       expect(response).toEqual(slydes);
     });
     
-    const req = httpMock.expectOne('https://localhost:7054/api/Presentation/GetSlydesByIdPresentation/1');
+    const req = httpMock.expectOne('https://localhost:7054/api/Presentation/GetSlydesAnswersByIdPresentation/1');
     expect(req.request.method).toBe('GET');
     req.flush(slydes);
     
