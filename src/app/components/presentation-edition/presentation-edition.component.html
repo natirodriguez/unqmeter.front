@@ -69,12 +69,30 @@
         <div class="row">
           <div class="col-md-12">
               <h4>{{question}}</h4>
-              <angular-tag-cloud [config]="options" [data]="data" [class.custom-css]='true'></angular-tag-cloud>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <angular-tag-cloud *ngIf="tipoPreguntaSel == 2" [config]="options" [data]="data" [class.custom-css]='true'></angular-tag-cloud>
+            <google-chart *ngIf="tipoPreguntaSel == 1 || tipoPreguntaSel == 3" #chart
+              [title]="title"
+              [type]="type"
+              [data]="dataBar"
+              [columns]="columnNames"
+              [options]="optionsBar"
+              [width]="width"
+              [height]="height">
+            </google-chart>
+            <div class="mt-2" *ngIf="tipoPreguntaSel == 4">
+              <div class="card me-2 p-2 d-inline text-center" *ngFor="let answer of currentSlyde.answers let i=index;">
+                {{answer.text}}
+            </div>
+          </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4" [ngClass]="{'overflow-y-scroll': itemsOpciones.length > 3}">
+    <div class="col-md-4" [ngClass]="{'overflow-y-scroll': itemsOpciones.length > 2}">
       <div class="row border-bottom border-secondary">
         <div class="col-md-12">
           <label class="form-label pt-2">Tipo de slyde</label>

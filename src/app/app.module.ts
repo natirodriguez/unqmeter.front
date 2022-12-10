@@ -23,6 +23,7 @@ import { ResponderPresentacionComponent } from './components/responder-presentac
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { TagCloudComponent } from 'angular-tag-cloud-module';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.getConfig();
@@ -54,6 +55,7 @@ export function tokenGetter() {
     ClipboardModule,
     ToastrModule.forRoot(),
     FormsModule,
+    GoogleChartsModule,
     TagCloudComponent,
     JwtModule.forRoot({
       config: {

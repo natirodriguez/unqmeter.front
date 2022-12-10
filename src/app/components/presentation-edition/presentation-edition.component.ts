@@ -9,6 +9,9 @@ import { SharePresentacionComponent } from '../share-presentacion/share-presenta
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OpcionesSlyde } from 'src/app/entities/OpcionesSlyde';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
+import { ChartType } from 'angular-google-charts';
+import { Answer } from 'src/app/entities/Answer';
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'presentation-edition',
@@ -38,7 +41,14 @@ export class PresentationEditionComponent implements OnInit {
   };
 
   data: CloudData[] = [];
-  
+  title = '';
+  type;
+  dataBar = [];
+  columnNames = ['',''];
+  optionsBar = { vAxis:{format: ''}};
+  width = 500;
+  height = 300;
+
   constructor(private route: ActivatedRoute, private baseService: BaseService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -98,7 +108,7 @@ export class PresentationEditionComponent implements OnInit {
         this.itemsOpciones = this.currentSlyde.opcionesSlydes;
         this.tipoPreguntaSel = this.currentSlyde.tipoPregunta;
         this.habilitado = this.currentSlyde.habilitadoParaResponder;
-        this.data = this.currentSlyde.answers as unknown as CloudData[];
+        this.SetAnswersSlyde(this.currentSlyde);
       });
   }
 
@@ -155,6 +165,7 @@ export class PresentationEditionComponent implements OnInit {
       this.entries = slyde.cantMaxRespuestaParticipantes;
       this.itemsOpciones = this.currentSlyde.opcionesSlydes;
       this.habilitado = this.currentSlyde.habilitadoParaResponder;
+      this.SetAnswersSlyde(this.currentSlyde);
   }
 
   setQuestionDescription(slydes : Slyde[]){
@@ -180,4 +191,35 @@ export class PresentationEditionComponent implements OnInit {
         console.log(this.estaVencida);
     });
   }
+
+  private SetAnswersSlyde (slyde: Slyde){
+    if(slyde.answers.length > 0){
+      switch (slyde.tipoPregunta){
+        case 1:
+          this.type = ChartType.ColumnChart;
+          this.dataBar = this.MapAnswers(slyde.answers);
+          break;
+        case 2:
+          this.data = slyde.answers as unknown as CloudData[];
+          break;
+        case 3:
+          this.type = ChartType.BarChart;
+          this.dataBar = this.MapAnswers(slyde.answers);
+          break;
+        default:
+          break;
+      }
+    }
+    
+  }
+
+  private MapAnswers(answers : Answer[]){
+    var answersResult = []
+    answers.forEach(answer => {
+      answersResult.push([answer.text,answer.weight])
+    });
+
+    return answersResult;
+  }
+
 }
