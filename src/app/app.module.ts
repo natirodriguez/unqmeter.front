@@ -60,7 +60,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:7054"],
+        allowedDomains: ["localhost"],
         disallowedRoutes: []
       }
     })
@@ -88,8 +88,7 @@ export function tokenGetter() {
       }
     } as SocialAuthServiceConfig
   },
-  {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
-  ],
+  {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

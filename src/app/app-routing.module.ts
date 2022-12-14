@@ -11,10 +11,11 @@ const routes: Routes = [{path:'login', component: LoginComponent},
 {path:'', component: HomePageComponent},
 {path:'presentations', component: PresentationsComponent},
 {path:'presentation-edition/:id', component: PresentationEditionComponent},
-{path:'responder-presentacion/:id', component: ResponderPresentacionComponent}];
+{path:'responder-presentacion/:id', component: ResponderPresentacionComponent},
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash: true})],
   exports: [RouterModule]
 })
 
