@@ -56,8 +56,8 @@ export class ResponderPresentacionComponent implements OnInit {
   getIPAddress()
   {
     this.http.get("https://api.ipify.org/?format=json").subscribe((res:any)=>{
-      this.ipAddress = "10.113.2";
-      this.getSlydes("10.113.2");
+      this.ipAddress = res.ip;
+      this.getSlydes(res.ip);
     });
   }
 
