@@ -56,8 +56,8 @@ export class ResponderPresentacionComponent implements OnInit {
   getIPAddress()
   {
     this.http.get("https://api.ipify.org/?format=json").subscribe((res:any)=>{
-      this.ipAddress = res.ip;
-      this.getSlydes(res.ip);
+      this.ipAddress = "10.113.2";
+      this.getSlydes("10.113.2");
     });
   }
 
@@ -134,6 +134,7 @@ export class ResponderPresentacionComponent implements OnInit {
     if(this.puedeGuardar){
       this.baseService.saveRespuesta(this.respuestaActual).subscribe((res : any) =>{
         this.model = [];
+        this.respuestaActual.descripcionesRespuesta = [];
       });
     }
   }
