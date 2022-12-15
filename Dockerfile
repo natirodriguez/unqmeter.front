@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
-FROM node:alpine as builder
+FROM node:18-alpine as builder
 RUN apk add chromium
 ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm install -g @angular/cli
